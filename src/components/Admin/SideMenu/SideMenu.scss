@@ -1,0 +1,128 @@
+.side-menu-admin {
+    .ui.menu {
+        width: 250px !important;
+        max-width: 250px;
+        transition: max-width 0.2s ease;  // Cambiado de width a max-width
+        overflow: hidden;
+        padding-top: 4.2em;
+        z-index: 99 !important;
+
+        i.icon {
+            float: initial !important;
+            margin: 0 !important;
+            margin-right: 13px !important;
+            font-size: 18px;  //para el tamaño de los iconos 
+        }
+
+        .side-menu-item {
+            span {
+                visibility: visible;
+                transition: visibility 0.2s ease, opacity 0.2s ease 0.2s; 
+                opacity: 1;
+                white-space: nowrap;                
+            }
+        }
+    } 
+
+    .content {
+        position: absolute;
+        right: 0;
+        padding: 20px;
+        width: calc(100% - 250px);
+        transition: width 0.2s ease;
+    }
+
+    // Clase para cuando el menú está cerrado
+    &.menu-closed {
+        .ui.menu {
+            max-width: 53px; //tamaño del menu contraido
+            .side-menu-item {
+                span {
+                    visibility: hidden;
+                    opacity: 0;
+                    transition: visibility 0s, opacity 0.2s ease;  // Cambiado el retraso a 0s
+                }
+            }
+        }
+
+        .content {
+            width: calc(100% - 53px);
+        }
+    }
+}
+
+
+
+/* .side-menu-admin {
+    .ui.menu {
+        width: 250px !important;
+        max-width: 250px;
+        transition: max-width 0.3s ease;  // Cambiado de width a max-width
+        overflow: hidden;
+        padding-top: 4em;
+        z-index: 99 !important;
+
+        i.icon {
+            float: initial !important;
+            margin: 0 !important;
+            margin-right: 13px !important;
+        }
+
+        .side-menu-item {
+            span {
+                visibility: visible;
+                transition: visibility 0.2s ease, opacity 0.2s ease 0.2s;  // Agregado retraso de 0.5s
+                opacity: 1;
+            }
+        }
+    } 
+
+    .content {
+        position: absolute;
+        right: 0;
+        padding: 20px;
+        width: calc(100% - 250px);
+        transition: width 0.03 ease;
+    }
+
+    // Clase para cuando el menú está cerrado
+    &.menu-closed {
+        .ui.menu {
+            max-width: 3%;
+            .side-menu-item {
+                span {
+                    visibility: hidden;
+                    opacity: 0;
+                }
+            }
+        }
+
+        .content {
+            width: 100%;
+        }
+    }
+}
+
+ */
+
+/* .side-menu-admin{
+    .ui.menu{
+        width: 250px !important;
+        overflow: hidden;
+        padding-top: 4em;
+        z-index: 99 !important;
+
+        i.icon{
+            float: initial !important;
+            margin: 0 !important;
+            margin-right: 10px !important;
+        }
+    } 
+
+    .content{
+        position: absolute;
+        right: 0;
+        padding: 20px;
+        width: calc(100% - 250px);
+    }
+} */

@@ -1,0 +1,35 @@
+.top-menu-admin{
+    height: 55px;
+    transition: max-width 0.9s ease;//por alguna rason no lo agarra y no respeta el tiempo de transicion
+    &__logo{
+        width: 250px;
+        background-color: #c4c4c4 !important;
+    }
+
+    .logo_hide{
+        max-width: 53px; //tamaño del menu contraido en topMenu
+        background-color: #c4c4c4 !important;
+    }
+
+    i.icon{
+         margin: 0 !important;   
+         font-size: 18px;            
+    }
+    i.icon.left-margin{ 
+        margin-right: 15px !important;              
+    }
+    
+}
+
+
+
+/*  .top-menu-admin__logo {
+    height: 55px;
+    width: 250px;
+    background-color: #c4c4c4 !important;
+    //transition: max-width 0.8s ease;
+}
+
+.top-menu-admin__logo.logo_hide {
+    max-width: 50px;
+}  */
