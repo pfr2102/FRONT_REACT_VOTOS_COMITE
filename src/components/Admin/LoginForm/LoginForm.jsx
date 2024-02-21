@@ -18,13 +18,13 @@ export const LoginForm = () => {
    const formik = useFormik({
       //son todos los valores de nuestro formulario
       initialValues:{
-         email:'',
+         username:'',
          password:'',         
       },
       //validaciones del formulario
       validationSchema: yup.object({
          //basicamente dices que en este campo tiene que ser de tipo string, un email y que es requerido
-         email: yup.string().email(true).required(true),
+         username: yup.string().required(true),
          password: yup.string().required(true),
       }),
       //es la accion a realizar cuando el usuario envia el formulario
@@ -48,11 +48,11 @@ export const LoginForm = () => {
   return (
      <Form className='login-form-admin' onSubmit={formik.handleSubmit}>
         <Form.Input 
-         name="email" 
+         name="username" 
          placeholder='Correo electronico' 
-         value={formik.values.email} 
+         value={formik.values.username} 
          onChange={formik.handleChange}
-         error={formik.errors.email}
+         error={formik.errors.username}
         />
         <Form.Input 
          name="password" 
