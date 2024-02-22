@@ -8,7 +8,7 @@ export const TableUsers = (props) => {
 
   const columns = [
     {
-      title: 'UserName',
+      title: 'Num_empleado',
       dataIndex: 'username',
     },
     {
@@ -18,20 +18,36 @@ export const TableUsers = (props) => {
     {
       title: 'Apellido',
       dataIndex: 'last_name',
+      sorter: true,
+      render: (last_name) => `${last_name}`,
     },
     {
-      title: 'Email',
-      dataIndex: 'email',
+      title: 'Puesto',
+      dataIndex: 'workstation',
+    },
+    {
+      title: 'Rango',
+      dataIndex: 'id_rank_fk',
+      filters: [
+        {
+          text: 'Superior',
+          value: '1',
+        },
+        {
+          text: 'Medio',
+          value: '2',
+        },
+        {
+          text: 'Operativo',
+          value: '3',
+        },
+      ],
+      onFilter: (value, record) => record.id_rank_fk ===  Number(value),
     },
     {
       title: 'Activo',
       dataIndex: 'is_active',
-      render: (value) => (value ? <Icon name='checkmark' /> : <Icon name='checkmark' />),
-    },
-    {
-      title: 'Staff',
-      dataIndex: 'is_staff',
-      render: (value) => (value ? <Icon name='checkmark' /> : <Icon name='checkmark' />),
+      render: (value) => (value ? <Icon name='checkmark' /> : <Icon name='close' />),
     },
     {
       title: 'Acciones',
