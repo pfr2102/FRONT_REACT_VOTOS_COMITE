@@ -1,0 +1,26 @@
+.header-page-admin {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px; // Añade un relleno para evitar que los elementos se peguen a los bordes
+  }
+  
+  .add-edit-user-form {
+    display: flex;
+    gap: 10px; // Espaciado entre los elementos
+    align-items: center; // Alinea los elementos verticalmente al centro
+  
+    .field {
+      margin-bottom: 0; // Elimina el margen inferior predeterminado
+    }
+  
+    .ui.button {
+      margin-top: 14px; // Ajusta el margen superior del botón
+    }
+  }
+  
+  /* Añade estilos para evitar que el botón positivo se pegue al último botón */
+  .ui.positive.button {
+    margin-top: 14px; // Ajusta el margen superior del botón positivo
+  }
+  
