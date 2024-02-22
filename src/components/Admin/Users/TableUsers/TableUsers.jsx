@@ -1,7 +1,7 @@
 import React from 'react';
-import { Table } from 'antd';
+import { Table, Tag} from 'antd';
 import './TableUsers.scss';
-import { Icon, Button } from 'semantic-ui-react';
+import { Icon, Button, Label } from 'semantic-ui-react';
 
 export const TableUsers = (props) => {
   const { users, updateUser } = props;
@@ -43,6 +43,18 @@ export const TableUsers = (props) => {
         },
       ],
       onFilter: (value, record) => record.id_rank_fk ===  Number(value),
+      render: (idRank) => {
+        switch (idRank) {
+          case 1:
+            return <Label color='purple'>Superior</Label>;
+          case 2:
+            return <Label color='blue'>Medio</Label>;
+          case 3:
+            return <Label color='orange'>Operatico</Label>;
+          default:
+            return <Label color='green'>Medio</Label>;
+        }
+      }, 
     },
     {
       title: 'Activo',
