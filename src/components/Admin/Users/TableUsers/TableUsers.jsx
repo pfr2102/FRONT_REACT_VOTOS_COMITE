@@ -1,8 +1,143 @@
-import React from 'react'
+import React from 'react';
+import { Table } from 'antd';
+import './TableUsers.scss';
+import { Icon, Button } from 'semantic-ui-react';
+
+export const TableUsers = (props) => {
+  const { users, updateUser } = props;
+
+  const columns = [
+    {
+      title: 'UserName',
+      dataIndex: 'username',
+    },
+    {
+      title: 'Nombre',
+      dataIndex: 'first_name',
+    },
+    {
+      title: 'Apellido',
+      dataIndex: 'last_name',
+    },
+    {
+      title: 'Email',
+      dataIndex: 'email',
+    },
+    {
+      title: 'Activo',
+      dataIndex: 'is_active',
+      render: (value) => (value ? <Icon name='checkmark' /> : <Icon name='checkmark' />),
+    },
+    {
+      title: 'Staff',
+      dataIndex: 'is_staff',
+      render: (value) => (value ? <Icon name='checkmark' /> : <Icon name='checkmark' />),
+    },
+    {
+      title: 'Acciones',
+      render: (text, record) => (
+        <span style={{ textAlign: 'left' }}>
+          <Button icon onClick={() => updateUser(record)}> <Icon name='edit' /></Button>
+          <Button icon color="red" onClick={() => console.log(`Eliminar usuario ${record.first_name}`)}> <Icon name='trash' /></Button>
+        </span>
+      ),
+    },
+  ];
+
+  return (
+    <>
+      <br />
+      <Table 
+        dataSource={users}
+        columns={columns}
+        bordered
+        pagination={{ pageSize: 7 }} // Optional pagination
+        rowKey="id"
+      />
+    </>    
+  );
+};
+ 
+
+
+
+/* import React from 'react';
+import MUIDataTable from 'mui-datatables';
+import { Button, Icon,Label } from '@mui/material'; // Import for icons and buttons
+import './TableUsers.scss';
+export const TableUsers = (props) => {
+  const { users, updateUser } = props;
+
+  const columns = [
+    { label: 'UserName', name: 'username' },
+    { label: 'Nombre', name: 'first_name' },
+    { label: 'Apellido', name: 'last_name' },
+    { label: 'Email', name: 'email' },
+    {
+      label: 'Activo',
+      options: {
+        customBodyRender: (value, tableMeta, updateValue) => {
+          return value ? (
+            <Label color="green">
+              <Icon>check</Icon> Activo
+            </Label>
+          ) : (
+            <Label color="red">
+              <Icon>close</Icon> Inactivo
+            </Label>
+          );
+        },
+      },
+    },
+    {
+      label: 'Staff',
+      options: {
+        customBodyRender: (value, tableMeta, updateValue) => {
+          return value ? (
+            <Label color="green">
+              <Icon>check</Icon> Activo
+            </Label>
+          ) : (
+            <Label color="red">
+              <Icon>close</Icon> Inactivo
+            </Label>
+          );
+        },
+      },
+    },
+    { label: 'Acciones', options: { filter: false, sort: false } }, // Disable filtering and sorting for actions column
+  ];
+
+  const options = {
+    // Customize options as needed, e.g., for pagination, filtering, sorting
+  };
+
+  return (
+    <MUIDataTable
+      title={"Usuarios"}
+      data={users}
+      columns={columns}
+      options={options}
+      renderActions={(rowData) => (
+        <ButtonGroup size="small">
+          <IconButton onClick={() => updateUser(rowData)}>
+            <EditIcon />
+          </IconButton>
+          <IconButton onClick={() => console.log(`Eliminar usuario ${rowData.first_name}`)}>
+            <DeleteIcon />
+          </IconButton>
+        </ButtonGroup>
+      )}
+    />
+  );
+};
+ */
+ 
+
+/* import React from 'react'
 import './TableUsers.scss';
 import { Table, Button, Icon, Label  } from 'semantic-ui-react';
 import { map } from 'lodash';
-
 
 export const TableUsers = (props) => {
   const { users, updateUser } = props;
@@ -38,7 +173,6 @@ export const TableUsers = (props) => {
                     <Label color='green'><Icon name='checkmark' />Activo</Label>  : <Label color='red'><Icon name='close'/> inactivo</Label>
                   }
                 </Table.Cell>
-                {/* columna de acciones */}
                 <Actions user={user} updateUser={updateUser}/>
 
               </Table.Row>
@@ -49,7 +183,6 @@ export const TableUsers = (props) => {
   );
 }
 
-/*componente para las columnas de acciones */
 function Actions({user, updateUser}){
   return (
     <Table.Cell textAlign='right'>      
@@ -57,4 +190,4 @@ function Actions({user, updateUser}){
       <Button icon negative onClick={() => console.log(`Eliminar usuario ${user.first_name}`)}> <Icon name='trash' /></Button>
     </Table.Cell>
   )
-}
+}   */
