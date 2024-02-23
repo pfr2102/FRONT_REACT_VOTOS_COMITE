@@ -1,6 +1,6 @@
 import React, { useState ,useEffect } from 'react'
 import { useVotes } from '../../hooks';
-import { HeaderRankin } from '../../components/Admin/Header/HeaderRankin';
+import { HeaderRankin } from '../../components/Admin/HeaderRankin/HeaderRankin';
 import { Header, TableVotes, AddEditUserForm } from '../../components/Admin';
 import { ModalBasic } from '../../components/common';
 import { Loader } from 'semantic-ui-react';
@@ -20,9 +20,9 @@ export const RankingVotes = () => {
     //estado para refrescar la tabla por cada cambio
     const [refresh, setRefresh] = useState(false);
 
-    /* useEffect(() => {
+    useEffect(() => {
         getVotesManual();
-    },[refresh]); */
+    },[]); 
 
 
       /* FUNCIONES PARA LA FUNCIONALIDAD DE LAS VENTANAS */

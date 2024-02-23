@@ -35,12 +35,12 @@ export const HeaderRankin = ({getVotesManual}) => {
 
   return (
     <>
-        <div className='header-page-admin'>
+        <div className='header-page-admin-rankin'>
             <h2>Consultar ranking de votos</h2>             
         </div>
     
-        <div className='add-edit-user-form'>   
-            <Form className='add-edit-user-form' onSubmit={formik.handleSubmit}>
+        <div className='add-edit-user-form-rankin'>   
+            <Form className='add-edit-user-form-rankin' onSubmit={formik.handleSubmit}>
                 {/* Dropdown de Etapas */}
                 <Form.Field>
                     <label>Etapa</label>
@@ -53,7 +53,7 @@ export const HeaderRankin = ({getVotesManual}) => {
                         { key: '2', value: '2', text: 'Selecciones' },
                     ]}
                     onChange={(e, { value }) => formik.setFieldValue('id_etapa_fk', value)}
-                    value={formik.values.id_etapa_fk}
+                    value={formik.values.id_etapa_fk || null}
                     />
                 </Form.Field>
                 {/* Dropdown de Rangos */}
@@ -69,13 +69,13 @@ export const HeaderRankin = ({getVotesManual}) => {
                         { key: '3', value: '3', text: 'Operativo' },
                     ]}
                     onChange={(e, { value }) => formik.setFieldValue('id_rango_fk', value)}
-                    value={formik.values.id_rango_fk}
+                    value={formik.values.id_rango_fk || null}
                     />
                 </Form.Field>
 
                 <Form.Input name='fecha_voto' label='Año' placeholder='Año' onChange={formik.handleChange} value={formik.values.fecha_voto} error={formik.errors.fecha_voto} />
 
-                <Button type='submit' primary fluid content='Buscar' />
+                <Button type='submit' primary fluid >Buscar<Icon name='search'style={{marginLeft:'5px'}}/></Button>
             </Form>
 
             <Button positive>

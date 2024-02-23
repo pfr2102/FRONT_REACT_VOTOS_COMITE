@@ -52,8 +52,8 @@ function MenuLeft(props) {
             )}     
 
             {auth.me?.is_staff && (
-                 <Menu.Item as={Link} to='/admin/RankingVotes'  active={pathname === '/admin/RankingVotes'} className='side-menu-item'>
-                    <Icon name='cart' /><span>Rankin votos</span>
+                 <Menu.Item as={Link} to='/admin/RankingVotes'  active={pathname === '/admin/RankingVotes'} className='side-menu-item'>                    
+                    <Icon name='line graph' /><span>Rankin votos</span>
                 </Menu.Item>
             )}        
         </Menu>
