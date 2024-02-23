@@ -1,0 +1,11 @@
+.card-default {
+  width: 25%;
+  min-width: 300px;
+  text-align: center;
+}
+
+card-title {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}

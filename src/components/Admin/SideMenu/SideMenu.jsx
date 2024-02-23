@@ -28,6 +28,10 @@ function MenuLeft(props) {
                 <Icon name='home' /><span>Home</span>
             </Menu.Item>  
 
+            <Menu.Item as={Link} to='/admin/vote'  active={pathname === '/admin/vote'} className='side-menu-item'>                    
+                    <Icon name='home' /><span>Votar</span>
+            </Menu.Item>
+
             {auth.me?.is_staff && (
                 <Menu.Item as={Link} to='/admin/payments-history'  active={pathname === '/admin/payments-history'} className='side-menu-item'>
                     <Icon name='history' /><span>Historial de Votos</span>

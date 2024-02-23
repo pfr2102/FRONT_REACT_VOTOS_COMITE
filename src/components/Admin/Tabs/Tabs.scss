@@ -1,0 +1,34 @@
+.tabBase {
+  position: relative;
+  border: 1px solid transparent;
+  cursor: pointer;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-top-left-radius: 70px; 
+  border-top-right-radius: 10px;
+}
+
+.tabBase:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+.activeTab {
+  background-color: #007bff;
+  color: white;
+}
+
+.tabContentContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.custom-card-wrapper {
+  margin-bottom: 20px;
+}
+
+.custom-card-inner {
+  padding: 8px;
+  max-width: 300px; 
+}

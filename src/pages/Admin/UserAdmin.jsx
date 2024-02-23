@@ -3,7 +3,6 @@ import { useUser } from '../../hooks';
 import { Header, TableUsers, AddEditUserForm } from '../../components/Admin';
 import { ModalBasic } from '../../components/common';
 import { Loader } from 'semantic-ui-react';
-import { add } from 'lodash';
 
 export const UserAdmin = () => {
   const { users, loading, getUsers } = useUser();

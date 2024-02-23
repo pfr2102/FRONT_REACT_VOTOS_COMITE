@@ -55,6 +55,7 @@ export function useUser() {
         loading,
         error,
         users,
+        auth,
         //metodos
         getMe,
         getUsers,  
