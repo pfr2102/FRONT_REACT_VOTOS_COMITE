@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import { getMeApi, getUsersApi, addUserApi } from '../api/user';
+import { getMeApi, getUsersApi, addUserApi, updateUserApi } from '../api/user';
 import { useAuth } from './useAuth';
 export function useUser() {
     const {auth} = useAuth();
@@ -21,7 +21,7 @@ export function useUser() {
             const response = await getUsersApi(auth.token);
             setLoading(false);
 
-            console.log(response);
+            //console.log(response);
             setUsers(response);
             return response;
         }catch (error) { 
@@ -29,7 +29,7 @@ export function useUser() {
             setError(error);
             //throw error; 
         }
-    }
+    }    
 
     const addUser = async (data) => {
         try {
@@ -37,6 +37,17 @@ export function useUser() {
             await addUserApi(data, auth.token);
             setLoading(false);
         }catch (error) {setLoading(false),  setError(error); }
+    }
+
+    const updateUser = async (userId, data) => {
+        try {
+            setLoading(true);
+            await updateUserApi(userId, data, auth.token);
+            setLoading(false);
+        } catch (error) {
+            setLoading(false);
+            setError(error);
+        }
     }
 
     return { 
@@ -47,6 +58,7 @@ export function useUser() {
         //metodos
         getMe,
         getUsers,  
-        addUser      
+        addUser,
+        updateUser    
      };
 }

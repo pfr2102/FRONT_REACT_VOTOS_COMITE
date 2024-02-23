@@ -1,11 +1,13 @@
 import React from 'react';
 import { Icon, Menu } from 'semantic-ui-react';
 import './TopMenu.scss';
+import {Link, useLocation} from 'react-router-dom';   
 import { useAuth } from '../../../hooks';
 
 export const TopMenu = (props) => {
     const { toggleMenu , isOpen} = props;
     const { auth, logouth } = useAuth();
+    const { pathname } = useLocation();
 
     // Renderiza el nombre del usuario en el menú
     const renderName = () => {
@@ -26,7 +28,7 @@ export const TopMenu = (props) => {
 
             <Menu.Menu position='right'>
                 <Menu.Item> <Icon name='user' className='left-margin' />{renderName()}</Menu.Item>
-                <Menu.Item onClick={logouth}>
+                <Menu.Item as={Link} to='/admin'  active={pathname === '/admin'} onClick={logouth}>
                     <Icon name='sign-out'/>
                 </Menu.Item>
             </Menu.Menu>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table, Tag} from 'antd';
+import { Table } from 'antd';
 import './TableUsers.scss';
 import { Icon, Button, Label } from 'semantic-ui-react';
 
@@ -50,7 +50,7 @@ export const TableUsers = (props) => {
           case 2:
             return <Label color='blue'>Medio</Label>;
           case 3:
-            return <Label color='orange'>Operatico</Label>;
+            return <Label color='orange'>Operativo</Label>;
           default:
             return <Label color='green'>Medio</Label>;
         }

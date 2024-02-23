@@ -49,7 +49,7 @@ export const LoginForm = () => {
      <Form className='login-form-admin' onSubmit={formik.handleSubmit}>
         <Form.Input 
          name="username" 
-         placeholder='Correo electronico' 
+         placeholder='Numero de empleado' 
          value={formik.values.username} 
          onChange={formik.handleChange}
          error={formik.errors.username}

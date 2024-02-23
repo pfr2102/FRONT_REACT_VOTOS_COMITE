@@ -39,7 +39,7 @@ export async function getUsersApi(token) {
     }catch (error) { throw error; }
 }
 
-
+//crear un nuevo usuario
 export async function addUserApi(data, token) {
     try {
         const url = `${BASE_API}/api/users/`;
@@ -57,6 +57,23 @@ export async function addUserApi(data, token) {
         
     }catch (error) { throw error; }
 }
+
+//actualizar un usuario con patch
+export async function updateUserApi(userId, data, token) {
+    try {
+        const url = `${BASE_API}/api/users/${userId}/`;
+        const params = {
+            headers: { 
+                Authorization: `Bearer ${token}`, 
+                'Content-Type': 'application/json',
+            },
+        }
+        // Use axios.patch for updating an existing resource
+        const response = await axios.patch(url, data, params);
+        return response.data;
+    } catch (error) {throw error;}
+}
+
 
 /* export async function addUserApi(data, token) {
     try {

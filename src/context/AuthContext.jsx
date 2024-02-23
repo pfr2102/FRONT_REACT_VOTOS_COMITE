@@ -41,8 +41,8 @@ export function AuthProvider(props){
         if(!auth) return;
         setAuth(null);
         removeToken();
-    }
-
+        //history.push('/admin');
+    }      
 
     const valueContext = {
         //como auth es un estado se modifica cada inicio de sesion
