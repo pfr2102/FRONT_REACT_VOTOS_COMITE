@@ -25,24 +25,14 @@ function MenuLeft(props) {
     return (
         <Menu fixed='left' borderless className='side' vertical> 
             <Menu.Item as={Link} to='/admin'  active={pathname === '/admin'} className='side-menu-item'>
-                <Icon name='home' /><span>Pedidos</span>
+                <Icon name='home' /><span>Home</span>
             </Menu.Item>  
 
-            <Menu.Item as={Link} to='/admin/tables'  active={pathname === '/admin/tables'} className='side-menu-item'>
-                <Icon name='table' /><span>Mesas</span>
-            </Menu.Item>  
-
-            <Menu.Item as={Link} to='/admin/payments-history'  active={pathname === '/admin/payments-history'} className='side-menu-item'>
-                <Icon name='history' /><span>Historial de pago</span>
-            </Menu.Item>  
-
-            <Menu.Item as={Link} to='/admin/categories'  active={pathname === '/admin/categories'} className='side-menu-item'>
-                <Icon name='folder' /><span>Categorias</span>
-            </Menu.Item>
-
-            <Menu.Item as={Link} to='/admin/products'  active={pathname === '/admin/products'} className='side-menu-item'>
-                <Icon name='cart' /><span>Productos</span>
-            </Menu.Item>
+            {auth.me?.is_staff && (
+                <Menu.Item as={Link} to='/admin/payments-history'  active={pathname === '/admin/payments-history'} className='side-menu-item'>
+                    <Icon name='history' /><span>Historial de Votos</span>
+                </Menu.Item>  
+            )} 
             
             {/*bloqueamos el acceso de los usuarios que no son administradores*/}
             {auth.me?.is_staff && (
