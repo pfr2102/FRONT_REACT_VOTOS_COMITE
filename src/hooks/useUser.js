@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import { getMeApi, getUsersApi, addUserApi, updateUserApi } from '../api/user';
+import { getMeApi, getUsersApi, addUserApi, updateUserApi, updateUserApiImage, addUserApiImage } from '../api/user';
 import { useAuth } from './useAuth';
 export function useUser() {
     const {auth} = useAuth();
@@ -34,7 +34,12 @@ export function useUser() {
     const addUser = async (data) => {
         try {
             setLoading(true);
-            await addUserApi(data, auth.token);
+            //consultas si existe imagen en el formulario para ejecutar una peticion especifica para imagenes o no
+            if(data.image) {
+                await addUserApiImage(data, auth.token);
+            }else{
+                await addUserApi(data, auth.token);
+            }
             setLoading(false);
         }catch (error) {setLoading(false),  setError(error); }
     }
@@ -42,7 +47,14 @@ export function useUser() {
     const updateUser = async (userId, data) => {
         try {
             setLoading(true);
-            await updateUserApi(userId, data, auth.token);
+            //consultas si existe imagen en el formulario para ejecutar una peticion especifica para imagenes o no
+            if(data.image) {
+                await updateUserApiImage(userId, data, auth.token);
+                console.log('Update con imagen');
+            }else{
+                await updateUserApi(userId, data, auth.token);
+                console.log('Update sin imagen');
+            }
             setLoading(false);
         } catch (error) {
             setLoading(false);

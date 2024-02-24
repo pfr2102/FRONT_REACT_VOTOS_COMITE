@@ -53,7 +53,7 @@ export const UserAdmin = () => {
       
       )}
       {/* es el componente de una ventana modal que lo creaste en components/common */}
-      <ModalBasic show={showModal} title={titleModal} onClose={openCloseModal} children={contentModal} size={'tiny'}/>
+      <ModalBasic show={showModal} title={titleModal} onClose={openCloseModal} children={contentModal} size={'md'}/>
     </>    
   )
 }

@@ -29,7 +29,7 @@ function MenuLeft(props) {
             </Menu.Item>  
 
             <Menu.Item as={Link} to='/admin/vote'  active={pathname === '/admin/vote'} className='side-menu-item'>                    
-                    <Icon name='home' /><span>Votar</span>
+                    <Icon name='vcard' /><span>Votar</span>
             </Menu.Item>
 
             {auth.me?.is_staff && (

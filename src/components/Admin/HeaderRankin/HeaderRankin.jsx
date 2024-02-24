@@ -16,9 +16,9 @@ export const HeaderRankin = ({getVotesManual}) => {
         },
         /* esquema de validaciones o restricciones de cada campo */
         validationSchema: Yup.object({
-            id_etapa_fk: Yup.number().required('El numero de etapa'), 
-            id_rango_fk: Yup.number().required('El numero del rango'), 
-            fecha_voto: Yup.number().required('El año de las votaciones o nominaciones'),                
+            id_etapa_fk: Yup.number().required(true), 
+            id_rango_fk: Yup.number().required(true), 
+            fecha_voto: Yup.number().required(true),                
         }),
         /* es la accion a realizar cuando el usuario envia el formulario */
         validateOnChange: false,
