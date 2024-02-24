@@ -1,13 +1,10 @@
 import React, { useState ,useEffect } from 'react'
 import { useVotes } from '../../hooks';
 import { HeaderRankin } from '../../components/Admin/HeaderRankin/HeaderRankin';
-import { Header, TableVotes, AddEditUserForm } from '../../components/Admin';
+import { TableVotes, AddEditUserForm } from '../../components/Admin';
 import { ModalBasic } from '../../components/common';
 import { Loader } from 'semantic-ui-react';
-import { add } from 'lodash';
 
-import { useFormik } from 'formik';
-import * as Yup from 'yup';
 import {Form, Button, Icon, Checkbox} from 'semantic-ui-react';
 
 export const RankingVotes = () => {
@@ -24,10 +21,16 @@ export const RankingVotes = () => {
         getVotesManual();
     },[]); 
 
-
       /* FUNCIONES PARA LA FUNCIONALIDAD DE LAS VENTANAS */
      const openCloseModal = () => { setShowModal((prev) => !prev); }  // modificar el estado de la ventana (cerrado/abierto) 
      const onRefresh = () => { setRefresh((prev) => !prev);} 
+
+     const updateUser = (data) => {
+      //console.log(data);
+      setTitleModal('Editar usuario');
+      setContentModal(<AddEditUserForm onCloseModal={openCloseModal} onRefresh={onRefresh} user={data}/>);
+      openCloseModal();
+    }
     
 
   return (
