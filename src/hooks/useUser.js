@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import { getMeApi, getUsersApi, addUserApi, updateUserApi, updateUserApiImage, addUserApiImage } from '../api/user';
+import { getMeApi, getUsersApi, addUserApi, updateUserApi, updateUserApiImage, addUserApiImage, getUserApi } from '../api/user';
 import { useAuth } from './useAuth';
 export function useUser() {
     const {auth} = useAuth();
@@ -14,6 +14,7 @@ export function useUser() {
         }catch (error) { throw error; }
     }
 
+    //para obtener todos los usuarios
     const getUsers = async () => {
         try {
             setLoading(true);
@@ -29,8 +30,23 @@ export function useUser() {
             setError(error);
             //throw error; 
         }
-    }    
+    }
+    
+    //para obtener un usuario
+    const getUser = async (userId) => {
+        try {
+            setLoading(true);
+            const response = await getUserApi(userId, auth.token);            
+            setLoading(false);
+            setUsers(response);
+            return response;
+        } catch (error) {
+            setLoading(false);
+            setError(error);
+        }
+    }
 
+    //para crear un nuevo usuario cuando no hay imagen o para actualizar un usuario cuando hay imagen
     const addUser = async (data) => {
         try {
             setLoading(true);
@@ -44,6 +60,7 @@ export function useUser() {
         }catch (error) {setLoading(false),  setError(error); }
     }
 
+    //para actualizar un usuario
     const updateUser = async (userId, data) => {
         try {
             setLoading(true);
@@ -70,7 +87,8 @@ export function useUser() {
         auth,
         //metodos
         getMe,
-        getUsers,  
+        getUsers,
+        getUser,  
         addUser,
         updateUser    
      };

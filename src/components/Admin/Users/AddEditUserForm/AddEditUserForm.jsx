@@ -8,9 +8,8 @@ import { toast } from 'react-toastify';
 //para imagenes
 import {useDropzone} from 'react-dropzone';
 
-export const AddEditUserForm = ({onCloseModal, onRefresh, user}) => {
+export const AddEditUserForm = ({onCloseModal, onRefresh, user, isBlock}) => {
     const { addUser, updateUser } = useUser();
-
     //Estado para el manejo de imagenes
     const [previewImage, setPreviewImage] = useState(user?.image || null);
     //para el manejo de imagenes
@@ -38,7 +37,8 @@ export const AddEditUserForm = ({onCloseModal, onRefresh, user}) => {
             antiquity: user?.antiquity || '',
             //password: '',
             //image: user?.image || '',
-            is_staff:user?.is_staff ? true : false,
+            admin:user?.admin ? true : false,
+            is_staff:true,
             is_active:user?.is_active ? true : false 
         },
         /* esquema de validaciones o restricciones de cada campo */
@@ -82,16 +82,16 @@ export const AddEditUserForm = ({onCloseModal, onRefresh, user}) => {
   return (
     <Form className='add-edit-user-form' onSubmit={formik.handleSubmit}>
         <Form.Group widths='equal'>
-          <Form.Input name='username' placeholder='num_empleado' onChange={formik.handleChange} value={formik.values.username} error={formik.errors.username} />
+          <Form.Input name='username' placeholder='num_empleado' onChange={formik.handleChange} value={formik.values.username} error={formik.errors.username} readOnly={user ? true : false} />
         </Form.Group>
 
         <Form.Group widths='equal'>
-           <Form.Input name='workstation' placeholder='Puesto' onChange={formik.handleChange} value={formik.values.workstation} error={formik.errors.workstation} />
+           <Form.Input name='workstation' placeholder='Puesto' onChange={formik.handleChange} value={formik.values.workstation} error={formik.errors.workstation} readOnly={isBlock ? true : false}/>
         </Form.Group>
 
         <Form.Group widths='equal'>
-           <Form.Input name='first_name' placeholder='Nombre(s)' onChange={formik.handleChange} value={formik.values.first_name} error={formik.errors.first_name} />
-           <Form.Input name='last_name' placeholder='Apellidos' onChange={formik.handleChange} value={formik.values.last_name} error={formik.errors.last_name} />
+           <Form.Input name='first_name' placeholder='Nombre(s)' onChange={formik.handleChange} value={formik.values.first_name} error={formik.errors.first_name} readOnly={isBlock ? true : false}/>
+           <Form.Input name='last_name' placeholder='Apellidos' onChange={formik.handleChange} value={formik.values.last_name} error={formik.errors.last_name} readOnly={isBlock ? true : false}/>
         </Form.Group>
 
         <Form.Group widths='equal'>
@@ -104,12 +104,13 @@ export const AddEditUserForm = ({onCloseModal, onRefresh, user}) => {
               onChange={(e, { value }) => formik.setFieldValue('id_rank_fk', value)}
               value={formik.values.id_rank_fk}
               error={formik.errors.id_rank_fk}
+              disabled={isBlock ? true : false}
             />
-            <Form.Input name='antiquity' placeholder='antiguedad' onChange={formik.handleChange} value={formik.values.antiquity} error={formik.errors.antiquity} />
+            <Form.Input name='antiquity' placeholder='antiguedad' onChange={formik.handleChange} value={formik.values.antiquity} error={formik.errors.antiquity} readOnly={isBlock ? true : false}/>
         </Form.Group>
 
         <Form.Group widths='equal'>
-          <Form.Input name='password' type='password' placeholder='Password' onChange={formik.handleChange} value={formik.values.password} error={formik.errors.password} />
+          <Form.Input name='password' type='password' placeholder='Password' onChange={formik.handleChange} value={formik.values.password} error={formik.errors.password} readOnly={isBlock ? true : false}/>
         </Form.Group>
         
         {/* BOTON PARA SUBIR IMAGEN */}
@@ -123,11 +124,11 @@ export const AddEditUserForm = ({onCloseModal, onRefresh, user}) => {
         </Form.Group>
 
         <div className='add-edit-user-form__active'>
-           <Checkbox toggle checked={formik.values.is_active} onChange={(_, data) => formik.setFieldValue('is_active', data.checked)} /> Usuario Activo
+           <Checkbox toggle checked={formik.values.is_active} onChange={(_, data) => formik.setFieldValue('is_active', data.checked)} readOnly={isBlock ? true : false} /> Usuario Activo
         </div>
         <br />
-        <div className='add-edit-user-form__staff'>
-           <Checkbox toggle checked={formik.values.is_staff} onChange={(_, data) => formik.setFieldValue('is_staff', data.checked)} /> Usuario Administrador
+        <div className='add-edit-user-form__admin'>
+           <Checkbox toggle checked={formik.values.admin} onChange={(_, data) => formik.setFieldValue('admin', data.checked)} readOnly={isBlock ? true : false} /> Usuario Administrador
         </div>
          <br />
         <Button type='submit' primary fluid content={user ? 'Actualizar' : 'Guardar'} />

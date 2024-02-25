@@ -4,7 +4,7 @@ import './TableVotes.scss';
 import { Icon, Button, Label } from 'semantic-ui-react';
 
 export const TableVotes = (props) => {
-  const { votes } = props;
+  const { votes , findUser} = props;
  
 
   const columns = [
@@ -73,7 +73,7 @@ export const TableVotes = (props) => {
       title: 'Imagen',
       render: (text, record) => (
         <span style={{ textAlign: 'left' }}>
-          <Button icon color="red" onClick={() => console.log(`Eliminar usuario `)}> <Icon name='upload' /></Button>
+          <Button icon color="red" onClick={() => findUser(record.id_emp_candidato_fk)}> <Icon name='upload' /></Button>
         </span>
       ),
     },

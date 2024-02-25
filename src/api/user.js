@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { BASE_API } from '../utils/constants';
 
+//para iniciar sesion
 export async function loginApi(formValue) {
     try {
         const url = `${BASE_API}/api/auth/login/`;
@@ -16,6 +17,7 @@ export async function loginApi(formValue) {
     } catch (error) { throw error; }
 }
 //----------------------------------------------------------------------------
+//para obtener el usuario autenticado
 export async function getMeApi(token) {
     try {
         const url = `${BASE_API}/api/auth/me/`;
@@ -27,7 +29,7 @@ export async function getMeApi(token) {
     }catch (error) { throw error; }
 }
 //----------------------------------------------------------------------------
-
+//para obtener todos los usuarios
 export async function getUsersApi(token) {
     try {
         const url = `${BASE_API}/api/users/`;
@@ -38,7 +40,17 @@ export async function getUsersApi(token) {
         return response.data;
     }catch (error) { throw error; }
 }
-
+//para obtener un usuario
+export async function getUserApi(userId, token) {
+    try {
+        const url = `${BASE_API}/api/users/${userId}/`;
+        const params = {
+            headers: { Authorization: `Bearer ${token}`}            
+        }
+        const response = await axios.get(url, params);
+        return response.data;
+    } catch (error) { throw error; }    
+}
 
 //----------------------------------------------------------------------------
 //crear un nuevo usuario cuando no hay imagen

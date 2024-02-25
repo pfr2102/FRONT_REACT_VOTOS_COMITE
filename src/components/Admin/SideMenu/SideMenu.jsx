@@ -32,20 +32,20 @@ function MenuLeft(props) {
                     <Icon name='vcard' /><span>Votar</span>
             </Menu.Item>
 
-            {auth.me?.is_staff && (
+            {/* {auth.me?.admin && (
                 <Menu.Item as={Link} to='/admin/payments-history'  active={pathname === '/admin/payments-history'} className='side-menu-item'>
                     <Icon name='history' /><span>Historial de Votos</span>
                 </Menu.Item>  
-            )} 
+            )}  */}
             
             {/*bloqueamos el acceso de los usuarios que no son administradores*/}
-            {auth.me?.is_staff && (
+            {auth.me?.admin && (
                  <Menu.Item as={Link} to='/admin/users'  active={pathname === '/admin/users'} className='side-menu-item'>
                     <Icon name='users' /><span>Usuarios</span>
                 </Menu.Item>
             )}     
 
-            {auth.me?.is_staff && (
+            {auth.me?.admin && (
                  <Menu.Item as={Link} to='/admin/RankingVotes'  active={pathname === '/admin/RankingVotes'} className='side-menu-item'>                    
                     <Icon name='line graph' /><span>Rankin votos</span>
                 </Menu.Item>

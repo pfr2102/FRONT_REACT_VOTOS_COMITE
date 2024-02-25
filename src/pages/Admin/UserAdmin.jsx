@@ -17,7 +17,7 @@ export const UserAdmin = () => {
   /*console.log('loading -->', loading);
   console.log('users -->', users);*/
   useEffect(() => {
-    getUsers();
+    getUsers();    
   },[refresh]);
 
   /* FUNCIONES PARA LA FUNCIONALIDAD DE LAS VENTANAS */
@@ -39,7 +39,7 @@ export const UserAdmin = () => {
  const updateUser = (data) => {
     //console.log(data);
     setTitleModal('Editar usuario');
-    setContentModal(<AddEditUserForm onCloseModal={openCloseModal} onRefresh={onRefresh} user={data}/>);
+    setContentModal(<AddEditUserForm onCloseModal={openCloseModal} onRefresh={onRefresh} user={data} isBlock={false}/>);
     openCloseModal();
  }
 
