@@ -13,9 +13,12 @@ export const HomeAdmin = () => {
   };
 
   return (
+    <>
     <div>
-      <h1>Home Admin</h1>
+      <h1>Home</h1>
+      
       <Button onClick={handleLogout} type="primary">Logout</Button> // Primary button for a prominent action
     </div>
+   </>    
   );
 };

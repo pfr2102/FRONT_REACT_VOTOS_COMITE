@@ -45,7 +45,7 @@ export const UserAdmin = () => {
 
   return (
     <>
-      <Header title="UserAdmin" btnTitle="Nuevo usuario" btnClick={addUser} />
+      <Header title="Panel de administracion de empleados" btnTitle="Nuevo usuario" btnClick={addUser} />
       {loading ? (<Loader active inline='centered'> Cargando...</Loader> ) 
       :  
       (

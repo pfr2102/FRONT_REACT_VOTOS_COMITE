@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import { getCountVotes } from '../api/votes';
+import { getCountVotes, getCountVotesTop} from '../api/votes';
 import { useAuth } from './useAuth';
 
 
@@ -40,6 +40,25 @@ export function useVotes(){
     }
   }
 
+
+  const getVotesManualTop = async (id_etapa, fecha_voto, tope ) => {
+    try {
+        setLoading(true);
+        //nota: anio_voto tiene que ser una constante que almacene el año actual para que hagas una funcion de eso o bien se 
+        //lo mandas como parametro en la data 
+
+        const response = await getCountVotesTop(id_etapa, auth.me.id_rank_fk, fecha_voto, tope, auth.token);
+        setLoading(false);
+
+        setVotes(response);
+        console.log(response);
+        //return response;
+    }catch (error) { 
+        setLoading(false);
+        setError(error); 
+    }
+  }
+
   return { 
     //estados
     loading,
@@ -47,7 +66,8 @@ export function useVotes(){
     votes,
     //metodos
     getVotesUser,
-    getVotesManual   
+    getVotesManual,
+    getVotesManualTop  
   };
   
 }

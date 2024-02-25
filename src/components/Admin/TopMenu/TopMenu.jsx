@@ -20,7 +20,7 @@ export const TopMenu = (props) => {
     return (
         <Menu fixed='top' className='top-menu-admin'>           
             <Menu.Item className={`top-menu-admin__logo ${isOpen ? '' : 'logo_hide'}`}>
-            <Icon name='users' className='left-margin'/>{isOpen ? <p>ADMIN</p> : ''}
+            <Icon name='users' className='left-margin'/>{isOpen ? <p>PANEL</p> : ''}
             </Menu.Item>
             <Menu.Item onClick={toggleMenu}>
                 <Icon name={`${isOpen ? 'bars' : 'angle double right'}`} />

@@ -8,7 +8,7 @@ import { Loader } from 'semantic-ui-react';
 import {Form, Button, Icon, Checkbox} from 'semantic-ui-react';
 
 export const RankingVotes = () => {
-    const { votes, loading, getVotesManual } = useVotes();
+    const { votes, loading, getVotesManual, getVotesManualTop } = useVotes();
     const { users, getUser } = useUser();
     
     /* estados para el funcionamiento de la ventna modal */
@@ -18,9 +18,10 @@ export const RankingVotes = () => {
     //estado para refrescar la tabla por cada cambio
     const [refresh, setRefresh] = useState(false);
 
-    useEffect(() => {
-        getVotesManual();
+    useEffect( () => {
+         getVotesManual();
     },[]); 
+
 
       /* FUNCIONES PARA LA FUNCIONALIDAD DE LAS VENTANAS */
      const openCloseModal = () => { setShowModal((prev) => !prev); }  // modificar el estado de la ventana (cerrado/abierto) 
