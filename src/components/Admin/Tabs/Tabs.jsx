@@ -21,22 +21,54 @@ export const Tabs = () => {
 
   useEffect(() => {
     getUsers();
+    getStage();
   }, []);
 
   useEffect(() => {
-    renderCandidates();
+    if(stages){
+      renderCandidates();
+    }
   }, [activeTab]);
 
   const filteredUsers = users
-  ? users.filter(
-      (user) =>
-        user.first_name.toLowerCase().includes(search.toLowerCase()) ||
-        user.last_name.toLowerCase().includes(search.toLowerCase())
-    )
-  : [];
+    ? users.filter(
+        (user) =>
+          user.first_name.toLowerCase().includes(search.toLowerCase()) ||
+          user.last_name.toLowerCase().includes(search.toLowerCase())
+      )
+    : [];
 
   const toggle = (tab) => {
     if (activeTab !== tab) setActiveTab(tab);
+  };
+
+  const dateValidator = (stage) => {
+    if (stage === 1) {
+      const today = new Date('2022-01-01');
+      today.setHours(0, 0, 0, 0);
+      const startDate = parseDateString(stages[0].fecha_inicio);
+      const endDate = parseDateString(stages[0].fecha_fin);
+
+      const validate = today >= startDate && today <= endDate;
+      console.log(today, startDate, endDate);
+      console.log("etapa1:", validate);
+      return validate;
+    } else if(stage === 2) {
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const startDate = parseDateString(stages[1].fecha_inicio);
+      const endDate = parseDateString(stages[1].fecha_fin);
+
+      const validate = today >= startDate && today <= endDate;
+      console.log(today, startDate, endDate);
+      console.log("etapa2:", validate);
+      return validate;
+    }
+  };
+
+  const parseDateString = (dateString) => {
+    const [year, month, day] = dateString.split("-").map(Number);
+    return new Date(year, month - 1, day);
   };
 
   const renderCandidates = async () => {
@@ -44,6 +76,7 @@ export const Tabs = () => {
     const etapa = activeTab === "1" ? 1 : 2;
     const result = await userVoted(etapa, year);
     setHasVoted(result);
+    dateValidator(etapa);
   };
 
   const electionCards = (selectedUser) => {
@@ -90,6 +123,8 @@ export const Tabs = () => {
             <SearchBar setSearch={setSearch} />
             {hasVoted ? (
               <p>Ya has votado en esta etapa.</p>
+            ) : !dateValidator(activeTab) ? (
+              <p>Estás fuera de la fecha de votaciones.</p>
             ) : (
               <div className="tabContentContainer">
                 {filteredUsersWithoutSelectedCards
