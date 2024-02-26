@@ -10,9 +10,8 @@ export const AddVoteForm = ({ users, onDelete, stage, onClose }) => {
     const votes = users.map((user) => ({
       id_emp_votante_fk: auth.me.id,
       id_emp_candidato_fk: user.id,
-      /* id_rango_fk: auth.me.id_rank_fk, */
-      id_rango_fk: 1,
-      id_etapa_fk: stage.id,
+      id_rango_fk: auth.me.id_rank_fk,
+      id_etapa_fk: stage,
       fecha_voto: new Date(),
       estatus_revocacion: "false",
     }));

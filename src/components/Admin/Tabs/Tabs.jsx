@@ -8,6 +8,7 @@ import { useVotes } from "../../../hooks/useVotes";
 import { useStage } from "../../../hooks/useStage";
 import { SearchBar } from "../SearchBar/SearchBar";
 import { ModalBasic } from "../../common/ModalBasic/ModalBasic";
+import { AddVoteForm } from "../AddVoteForm/AddVoteForm";
 
 export const Tabs = () => {
   const [activeTab, setActiveTab] = useState("1");
@@ -22,10 +23,11 @@ export const Tabs = () => {
   useEffect(() => {
     getUsers();
     getStage();
+    renderCandidates();
   }, []);
 
   useEffect(() => {
-    if(stages){
+    if (stages) {
       renderCandidates();
     }
   }, [activeTab]);
@@ -43,26 +45,26 @@ export const Tabs = () => {
   };
 
   const dateValidator = (stage) => {
-    if (stage === 1) {
-      const today = new Date('2022-01-01');
-      today.setHours(0, 0, 0, 0);
-      const startDate = parseDateString(stages[0].fecha_inicio);
-      const endDate = parseDateString(stages[0].fecha_fin);
+    if(stages){
+      if (stage === 1) {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        const startDate = parseDateString(stages[0].fecha_inicio);
+        const endDate = parseDateString(stages[0].fecha_fin);
+  
+        const validate = today >= startDate && today <= endDate;
 
-      const validate = today >= startDate && today <= endDate;
-      console.log(today, startDate, endDate);
-      console.log("etapa1:", validate);
-      return validate;
-    } else if(stage === 2) {
-      const today = new Date();
-      today.setHours(0, 0, 0, 0);
-      const startDate = parseDateString(stages[1].fecha_inicio);
-      const endDate = parseDateString(stages[1].fecha_fin);
+        return validate;
+      } else if (stage === 2) {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        const startDate = parseDateString(stages[1].fecha_inicio);
+        const endDate = parseDateString(stages[1].fecha_fin);
+  
+        const validate = today >= startDate && today <= endDate;
 
-      const validate = today >= startDate && today <= endDate;
-      console.log(today, startDate, endDate);
-      console.log("etapa2:", validate);
-      return validate;
+        return validate;
+      }
     }
   };
 
@@ -80,9 +82,9 @@ export const Tabs = () => {
   };
 
   const electionCards = (selectedUser) => {
-    if (auth.me.id_rank_fk === 3 && selectedCards.length >= 2) {
+    if (auth.me.id_rank_fk === 3 && selectedCards.length >= 3) {
       setShowModal(true);
-    } else if (auth.me.id_rank_fk !== 3 && selectedCards.length >= 1) {
+    } else if (auth.me.id_rank_fk !== 3 && selectedCards.length >= 2) {
       setShowModal(true);
     } else {
       setSelectedCards([...selectedCards, selectedUser]);
@@ -123,9 +125,7 @@ export const Tabs = () => {
             <SearchBar setSearch={setSearch} />
             {hasVoted ? (
               <p>Ya has votado en esta etapa.</p>
-            ) : !dateValidator(activeTab) ? (
-              <p>Estás fuera de la fecha de votaciones.</p>
-            ) : (
+            ) : dateValidator(parseInt(activeTab)) ? (
               <div className="tabContentContainer">
                 {filteredUsersWithoutSelectedCards
                   .filter((user) => user.id_rank_fk === auth.me.id_rank_fk)
@@ -141,8 +141,11 @@ export const Tabs = () => {
                     </div>
                   ))}
               </div>
+            ) : (
+              <p>Estás fuera de la fecha de votaciones.</p>
             )}
           </TabPane>
+
           <TabPane tabId="2">
             <SearchBar setSearch={setSearch} />
             {hasVoted ? (
@@ -167,6 +170,22 @@ export const Tabs = () => {
           </TabPane>
         </TabContent>
       )}
+      <ModalBasic
+        show={showModal}
+        onClose={() => setShowModal(false)}
+        title={`Realiza tu votación para la etapa ${
+          activeTab === "1" ? "1" : "2"
+        }`}
+        size={"lg"}
+      >
+        <AddVoteForm
+          users={selectedCards}
+          onDelete={removeCard}
+          action={"Eliminar voto"}
+          stage={activeTab === "1" ? 1 : 2}
+          onClose={() => setShowModal(false)}
+        />
+      </ModalBasic>
     </>
   );
 };

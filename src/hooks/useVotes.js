@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { getCountVotes, getCountVotesTop, getCheckVotes } from "../api/votes";
+import { getCountVotes, getCountVotesTop, getCheckVotes, addVotesApi } from "../api/votes";
 import { useAuth } from "./useAuth";
 
 export function useVotes() {
@@ -85,6 +85,16 @@ export function useVotes() {
       return false; // En caso de error, devuelve false
     }
   };
+  const addVote = async (data) => {
+    try {
+      setLoading(true);
+      await addVotesApi(data, auth.token);
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      setError(error);
+    }
+  };
 
   return {
     loading,
@@ -94,5 +104,6 @@ export function useVotes() {
     getVotesManual,
     getVotesManualTop,
     userVoted,
+    addVote
   };
 }

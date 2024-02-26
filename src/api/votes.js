@@ -22,6 +22,26 @@ export async function getCountVotes(id_etapa, id_rango, anio_voto, token) {
     }
 }
 
+export async function addVotesApi(data, token) {
+    try {
+        const url = `${BASE_API}/api/voto/create_votosM/`;
+
+        const params = {
+            headers: { 
+                Authorization: `Bearer ${token}`, 
+                'Content-Type': 'application/json',
+            },
+        }
+
+        const response = await axios.post(url, data, params);
+
+        return response.data;
+        
+    } catch (error) { 
+        throw error; 
+    }
+}
+
 //para obtener los votos con el tope
 export async function getCountVotesTop(id_etapa, id_rango, anio_voto, tope, token) {
     try {
