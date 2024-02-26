@@ -50,9 +50,9 @@ export async function getCheckVotes(id_emp_votante, id_etapa, anio_voto, token) 
         const url = `${BASE_API}/api/voto/check_vote_exists/`;
         const params = {
             params: {
-                id_emp_votante: id_emp_votante,
+                id_emp_votante_fk: id_emp_votante,
                 id_etapa_fk: id_etapa,
-                anio_voto: anio_voto,
+                fecha_voto: anio_voto,
             },
             headers: {
                 Authorization: `Bearer ${token}`,
@@ -60,7 +60,7 @@ export async function getCheckVotes(id_emp_votante, id_etapa, anio_voto, token) 
         };
         const response = await axios.get(url, params);
         console.log(response);
-        //return response.data;
+        return response.data;
     } catch (error) {
         throw error;
     }

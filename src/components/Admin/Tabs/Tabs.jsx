@@ -13,27 +13,38 @@ export const Tabs = () => {
   const [activeTab, setActiveTab] = useState("1");
   const [search, setSearch] = useState("");
   const { users, loading, getUsers, auth } = useUser();
-  const { votes, loadingVotes, getTopVots, getVotes } = useVotes();
+  const { votes, loadingVotes, getTopVots, getVotes, userVoted } = useVotes();
   const { stages, loadingStage, getStage } = useStage();
   const [selectedCards, setSelectedCards] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [hasVoted, setHasVoted] = useState(false);
 
   useEffect(() => {
     getUsers();
-    getStage();
   }, []);
+
+  useEffect(() => {
+    renderCandidates();
+  }, [activeTab]);
+
+  const filteredUsers = users
+  ? users.filter(
+      (user) =>
+        user.first_name.toLowerCase().includes(search.toLowerCase()) ||
+        user.last_name.toLowerCase().includes(search.toLowerCase())
+    )
+  : [];
 
   const toggle = (tab) => {
     if (activeTab !== tab) setActiveTab(tab);
   };
 
-  const filteredUsers = users
-    ? users.filter(
-        (user) =>
-          user.first_name.toLowerCase().includes(search.toLowerCase()) ||
-          user.last_name.toLowerCase().includes(search.toLowerCase())
-      )
-    : [];
+  const renderCandidates = async () => {
+    const year = new Date().getFullYear().toString();
+    const etapa = activeTab === "1" ? 1 : 2;
+    const result = await userVoted(etapa, year);
+    setHasVoted(result);
+  };
 
   const electionCards = (selectedUser) => {
     if (auth.me.id_rank_fk === 3 && selectedCards.length >= 2) {
@@ -50,6 +61,7 @@ export const Tabs = () => {
     setSelectedCards(updatedCards);
     setShowModal(false);
   };
+
   const filteredUsersWithoutSelectedCards = filteredUsers.filter((user) => {
     return !selectedCards.some((card) => card.id === user.id);
   });
@@ -76,39 +88,47 @@ export const Tabs = () => {
         <TabContent activeTab={activeTab}>
           <TabPane tabId="1">
             <SearchBar setSearch={setSearch} />
-            <div className="tabContentContainer">
-              {filteredUsersWithoutSelectedCards
-              .filter((user) => user.id_rank_fk === auth.me.id_rank_fk)
-              .map((user) => (
-                <div className="custom-card-wrapper" key={user.id}>
-                  <div className="custom-card-inner">
-                    <CustomCardComponent
-                      user={user}
-                      action={"Nominar"}
-                      electionCards={electionCards}
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
+            {hasVoted ? (
+              <p>Ya has votado en esta etapa.</p>
+            ) : (
+              <div className="tabContentContainer">
+                {filteredUsersWithoutSelectedCards
+                  .filter((user) => user.id_rank_fk === auth.me.id_rank_fk)
+                  .map((user) => (
+                    <div className="custom-card-wrapper" key={user.id}>
+                      <div className="custom-card-inner">
+                        <CustomCardComponent
+                          user={user}
+                          action={"Nominar"}
+                          electionCards={electionCards}
+                        />
+                      </div>
+                    </div>
+                  ))}
+              </div>
+            )}
           </TabPane>
           <TabPane tabId="2">
             <SearchBar setSearch={setSearch} />
-            <div className="tabContentContainer">
-              {filteredUsersWithoutSelectedCards
-              .filter((user) => user.id_rank_fk === auth.me.id_rank_fk)
-              .map((user) => (
-                <div className="custom-card-wrapper" key={user.id}>
-                  <div className="custom-card-inner">
-                    <CustomCardComponent
-                      user={user}
-                      action={"Nominar"}
-                      electionCards={electionCards}
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
+            {hasVoted ? (
+              <p>Ya has votado en esta etapa.</p>
+            ) : (
+              <div className="tabContentContainer">
+                {filteredUsersWithoutSelectedCards
+                  .filter((user) => user.id_rank_fk === auth.me.id_rank_fk)
+                  .map((user) => (
+                    <div className="custom-card-wrapper" key={user.id}>
+                      <div className="custom-card-inner">
+                        <CustomCardComponent
+                          user={user}
+                          action={"Nominar"}
+                          electionCards={electionCards}
+                        />
+                      </div>
+                    </div>
+                  ))}
+              </div>
+            )}
           </TabPane>
         </TabContent>
       )}
