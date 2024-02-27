@@ -14,7 +14,7 @@ Para comenzar a trabajar en este proyecto en tu máquina local, sigue estos paso
 
 ## Instala dependencias del proyecto
 
-    npm i
+    yarn install
 
 
 ## Push y Pull desde tu repositorio local
