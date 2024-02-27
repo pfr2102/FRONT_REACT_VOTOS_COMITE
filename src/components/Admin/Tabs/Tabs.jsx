@@ -14,7 +14,7 @@ export const Tabs = () => {
   const [activeTab, setActiveTab] = useState("1");
   const [search, setSearch] = useState("");
   const { users, loading, getUsers, auth } = useUser();
-  const { votes, loadingVotes, getTopVots, getVotes, userVoted } = useVotes();
+  const { votes, loadingVotes, userVoted, getVotesManualTop } = useVotes();
   const { stages, loadingStage, getStage } = useStage();
   const [selectedCards, setSelectedCards] = useState([]);
   const [showModal, setShowModal] = useState(false);
@@ -27,8 +27,17 @@ export const Tabs = () => {
   }, []);
 
   useEffect(() => {
+    setSelectedCards([]);
     if (stages) {
       renderCandidates();
+      if (activeTab === "2") {
+        const year = new Date().getFullYear().toString();
+        if (auth.me.id_rank_fk === 3) {
+          getVotesManualTop(1, year, 6);
+        } else if (auth.me.id_rank_fk === 2 || auth.me.id_rank_fk === 1) {
+          getVotesManualTop(1, year, 4);
+        }
+      }
     }
   }, [activeTab]);
 
@@ -45,22 +54,22 @@ export const Tabs = () => {
   };
 
   const dateValidator = (stage) => {
-    if(stages){
+    if (stages) {
       if (stage === 1) {
         const today = new Date();
         today.setHours(0, 0, 0, 0);
         const startDate = parseDateString(stages[0].fecha_inicio);
         const endDate = parseDateString(stages[0].fecha_fin);
-  
+
         const validate = today >= startDate && today <= endDate;
 
         return validate;
       } else if (stage === 2) {
-        const today = new Date();
+        const today = new Date("2024-02-28");
         today.setHours(0, 0, 0, 0);
         const startDate = parseDateString(stages[1].fecha_inicio);
         const endDate = parseDateString(stages[1].fecha_fin);
-  
+
         const validate = today >= startDate && today <= endDate;
 
         return validate;
@@ -77,7 +86,7 @@ export const Tabs = () => {
     const year = new Date().getFullYear().toString();
     const etapa = activeTab === "1" ? 1 : 2;
     const result = await userVoted(etapa, year);
-    setHasVoted(result);
+    setHasVoted(false);
     dateValidator(etapa);
   };
 
@@ -92,14 +101,27 @@ export const Tabs = () => {
   };
 
   const removeCard = (userId) => {
-    const updatedCards = selectedCards.filter((card) => card.id !== userId);
-    setSelectedCards(updatedCards);
-    setShowModal(false);
+    if (activeTab === "1") {
+      const updatedCards = selectedCards.filter((card) => card.id !== userId);
+      setSelectedCards(updatedCards);
+      setShowModal(false);
+    } else {
+      const updatedCards = selectedCards.filter((card) => card.id_emp_candidato_fk !== userId);
+      setSelectedCards(updatedCards);
+      setShowModal(false);
+    }
   };
 
   const filteredUsersWithoutSelectedCards = filteredUsers.filter((user) => {
     return !selectedCards.some((card) => card.id === user.id);
   });
+  const filteredUsersWithoutSelectedCards2 =
+    votes &&
+    votes.filter((vote) => {
+      return !selectedCards.some(
+        (card) => card.id_emp_candidato_fk === vote.id_emp_candidato_fk
+      );
+    });
 
   return (
     <>
@@ -117,6 +139,7 @@ export const Tabs = () => {
           Etapa 2
         </NavItem>
       </Nav>
+
       {loading ? (
         <p>Cargando a los candidatos...</p>
       ) : (
@@ -136,6 +159,7 @@ export const Tabs = () => {
                           user={user}
                           action={"Nominar"}
                           electionCards={electionCards}
+                          etapa={1}
                         />
                       </div>
                     </div>
@@ -150,22 +174,29 @@ export const Tabs = () => {
             <SearchBar setSearch={setSearch} />
             {hasVoted ? (
               <p>Ya has votado en esta etapa.</p>
-            ) : (
+            ) : dateValidator(parseInt(activeTab)) ? (
               <div className="tabContentContainer">
-                {filteredUsersWithoutSelectedCards
-                  .filter((user) => user.id_rank_fk === auth.me.id_rank_fk)
-                  .map((user) => (
-                    <div className="custom-card-wrapper" key={user.id}>
-                      <div className="custom-card-inner">
-                        <CustomCardComponent
-                          user={user}
-                          action={"Nominar"}
-                          electionCards={electionCards}
-                        />
+                {votes &&
+                  filteredUsersWithoutSelectedCards2
+                    .filter((vote) => vote.id_rango_fk === auth.me.id_rank_fk)
+                    .map((vote) => (
+                      <div
+                        className="custom-card-wrapper"
+                        key={vote.id_emp_candidato_fk}
+                      >
+                        <div className="custom-card-inner">
+                          <CustomCardComponent
+                            user={vote}
+                            action={"Votar"}
+                            electionCards={electionCards}
+                            etapa={2}
+                          />
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
               </div>
+            ) : (
+              <p>Estás fuera de la fecha de votaciones.</p>
             )}
           </TabPane>
         </TabContent>

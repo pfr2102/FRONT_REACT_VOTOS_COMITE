@@ -77,7 +77,6 @@ export function useVotes() {
         auth.token
       );
       setLoading(false);
-      console.log(response);
       return response; // Devuelve directamente la respuesta
     } catch (error) {
       setLoading(false);

@@ -50,8 +50,8 @@ export async function getCountVotesTop(id_etapa, id_rango, anio_voto, tope, toke
             params: {
                 id_etapa_fk: id_etapa,
                 id_rango_fk: id_rango,
-                anio_voto: anio_voto,
-                tope: tope,
+                fecha_voto: anio_voto,
+                top: tope,
             },
             headers: {
                 Authorization: `Bearer ${token}`,
@@ -79,7 +79,6 @@ export async function getCheckVotes(id_emp_votante, id_etapa, anio_voto, token) 
             }
         };
         const response = await axios.get(url, params);
-        console.log(response);
         return response.data;
     } catch (error) {
         throw error;
