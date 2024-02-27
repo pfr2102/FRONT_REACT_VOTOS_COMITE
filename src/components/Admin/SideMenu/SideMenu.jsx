@@ -39,7 +39,7 @@ function MenuLeft(props) {
             )}  */}
             
             {/*bloqueamos el acceso de los usuarios que no son administradores*/}
-            {auth.me?.admin && (
+            {/* auth.me?.admin && */ (
                  <Menu.Item as={Link} to='/admin/users'  active={pathname === '/admin/users'} className='side-menu-item'>
                     <Icon name='users' /><span>Usuarios</span>
                 </Menu.Item>
