@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Table, Button } from "antd";
+import { Table } from "antd";
 import { useAuth, useVotes } from "../../../hooks";
 import {toast} from 'react-toastify';
+import { Icon, Button } from 'semantic-ui-react';
 import "./AddVoteForm.scss";
 
 export const AddVoteForm = ({ users, onDelete, stage, onClose }) => {
@@ -60,9 +61,9 @@ export const AddVoteForm = ({ users, onDelete, stage, onClose }) => {
       title: "Acción",
       key: "action",
       render: (text, record) => (
-        <Button type="primary"
-        onClick={() => stage === 1 ? handleDelete(record.id) : handleDelete(record.id_emp_candidato_fk)}>
-          Eliminar voto
+        <Button icon color="red" 
+        onClick={() => stage === 1 ? handleDelete(record.id) : handleDelete(record.id_emp_candidato_fk)}>  <Icon name='trash' />
+          Eliminar
         </Button>
       ),
     },
@@ -78,8 +79,8 @@ export const AddVoteForm = ({ users, onDelete, stage, onClose }) => {
           rowKey={(record) => stage === 2 ? record.id_emp_candidato_fk : record.id}
         />
       </div>
-      <div className="voteButton">
-        <Button type="primary" onClick={handleVote}>
+      <div className="buttonContainer">
+        <Button className="voteButton" icon onClick={handleVote}> <Icon name='edit' />
           Votar
         </Button>
       </div>

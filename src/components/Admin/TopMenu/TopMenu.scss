@@ -1,35 +1,27 @@
-.top-menu-admin{
-    height: 55px;
-    transition: max-width 0.9s ease;//por alguna rason no lo agarra y no respeta el tiempo de transicion
-    &__logo{
-        width: 250px;
-        background-color: #c4c4c4 !important;
-    }
-
-    .logo_hide{
-        max-width: 53px; //tamaño del menu contraido en topMenu
-        background-color: #c4c4c4 !important;
-    }
-
-    i.icon{
-         margin: 0 !important;   
-         font-size: 18px;            
-    }
-    i.icon.left-margin{ 
-        margin-right: 15px !important;              
-    }
-    
-}
-
-
-
-/*  .top-menu-admin__logo {
-    height: 55px;
+.top-menu-admin {
+  height: 55px;
+  transition: max-width 0.9s ease; //por alguna rason no lo agarra y no respeta el tiempo de transicion
+  /*     background-color: #D6C8BB !important; */
+  background: linear-gradient(315deg, #d6c8bb 70%, #c4b19a 90%) !important;
+  &__logo {
     width: 250px;
-    background-color: #c4c4c4 !important;
-    //transition: max-width 0.8s ease;
-}
+    background: linear-gradient(315deg, #d6c8bb 45%, #c4b19a 60%) ;
+  }
 
-.top-menu-admin__logo.logo_hide {
-    max-width: 50px;
-}  */
+  .logo_hide {
+    max-width: 53px; //tamaño del menu contraido en topMenu
+/*     background-color: #d6c8bb !important; */
+  }
+
+  i.icon {
+    margin: 0 !important;
+    font-size: 18px;
+  }
+  i.icon.left-margin {
+    margin-right: 15px !important;
+  }
+  .top-menu-admin__user {
+    /* background-color: #D6C8BB !important; */
+    background: linear-gradient(315deg, #c4b19a 45%, #d6c8bb 60%);
+  }
+}

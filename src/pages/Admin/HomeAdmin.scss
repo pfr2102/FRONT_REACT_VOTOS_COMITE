@@ -1,0 +1,14 @@
+.HomeAdmin-container {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    height: 100vh;
+  }
+  
+  .HomeAdmin-container img {
+    max-width: 75%;
+    border-radius: none;
+    box-shadow: none;
+    filter: blur(0.8px)
+  }
+  

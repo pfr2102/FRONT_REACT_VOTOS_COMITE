@@ -1,6 +1,7 @@
 import React from 'react';
-import { Button } from 'antd'; // Import Button component from Ant Design
 import { useAuth } from '../../hooks'; // Assume useAuth hook provides logout functionality
+import './HomeAdmin.scss';
+import logo from '../../assets/LogoGob.png';
 
 export const HomeAdmin = () => {
   const { logout } = useAuth(); // Access logout function from useAuth hook
@@ -14,10 +15,8 @@ export const HomeAdmin = () => {
 
   return (
     <>
-    <div>
-      <h1>Home</h1>
-      
-      <Button onClick={handleLogout} type="primary">Logout</Button> // Primary button for a prominent action
+    <div className="HomeAdmin-container">
+      <img src={logo} alt="" />
     </div>
    </>    
   );

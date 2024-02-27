@@ -66,7 +66,7 @@ export const TableUsers = (props) => {
       render: (text, record) => (
         <span style={{ textAlign: 'left' }}>
           <Button icon onClick={() => updateUser(record)}> <Icon name='edit' /></Button>
-          <Button icon color="red" onClick={() => console.log(`Eliminar usuario ${record.first_name}`)}> <Icon name='trash' /></Button>
+         {/*  <Button icon color="red" onClick={() => console.log(`Eliminar usuario ${record.first_name}`)}> <Icon name='trash' /></Button> */}
         </span>
       ),
     },

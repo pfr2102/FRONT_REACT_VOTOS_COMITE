@@ -131,7 +131,7 @@ export const AddEditUserForm = ({onCloseModal, onRefresh, user, isBlock}) => {
            <Checkbox toggle checked={formik.values.admin} onChange={(_, data) => formik.setFieldValue('admin', data.checked)} readOnly={isBlock ? true : false} /> Usuario Administrador
         </div>
          <br />
-        <Button type='submit' primary fluid content={user ? 'Actualizar' : 'Guardar'} />
+        <Button className="custom-button" type='submit' primary fluid content={user ? 'Actualizar' : 'Guardar'} />
     </Form>
   )
 }

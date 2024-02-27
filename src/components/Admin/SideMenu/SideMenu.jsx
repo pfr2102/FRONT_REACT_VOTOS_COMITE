@@ -25,7 +25,7 @@ function MenuLeft(props) {
     return (
         <Menu fixed='left' borderless className='side' vertical> 
             <Menu.Item as={Link} to='/admin'  active={pathname === '/admin'} className='side-menu-item'>
-                <Icon name='home' /><span>Home</span>
+                <Icon name='home' /><span>Inicio</span>
             </Menu.Item>  
 
             <Menu.Item as={Link} to='/admin/vote'  active={pathname === '/admin/vote'} className='side-menu-item'>                    
@@ -47,7 +47,7 @@ function MenuLeft(props) {
 
             {auth.me?.admin && (
                  <Menu.Item as={Link} to='/admin/RankingVotes'  active={pathname === '/admin/RankingVotes'} className='side-menu-item'>                    
-                    <Icon name='line graph' /><span>Rankin votos</span>
+                    <Icon name='line graph' /><span>Ranking de votos</span>
                 </Menu.Item>
             )}        
         </Menu>

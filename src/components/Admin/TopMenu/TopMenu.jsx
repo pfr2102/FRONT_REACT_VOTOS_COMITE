@@ -26,7 +26,7 @@ export const TopMenu = (props) => {
                 <Icon name={`${isOpen ? 'bars' : 'angle double right'}`} />
             </Menu.Item>
 
-            <Menu.Menu position='right'>
+            <Menu.Menu position='right' className='top-menu-admin__user'>
                 <Menu.Item> <Icon name='user' className='left-margin' />{renderName()}</Menu.Item>
                 <Menu.Item as={Link} to='/admin'  active={pathname === '/admin'} onClick={logouth}>
                     <Icon name='sign-out'/>
@@ -37,36 +37,3 @@ export const TopMenu = (props) => {
 };
 
  
-
-
-/* import React from 'react';
-import {Icon, Menu} from 'semantic-ui-react';
-import './TopMenu.scss';
-import {useAuth} from '../../../hooks';
-
-export const TopMenu = () => {
-    const {auth, logouth} = useAuth();
-    //console.log(auth);
-
-    //renderiza el nombre del usuario en el menu
-    const renderName = () => {
-        //si el fist_name y el last_name existen en el objeto (auth.me) se renderiza el nombre
-        if(auth.me?.first_name && auth.me?.last_name){ return `${auth.me.first_name} ${auth.me.last_name}`; }
-        return auth.me?.email;
-    }
-
-  return (  
-    <Menu fixed='top' className='top-menu-admin'>
-      <Menu.Item className='top-menu-admin__logo'>
-        <p>ADMIN</p>
-      </Menu.Item>
-
-      <Menu.Menu position='right'> 
-        <Menu.Item>{renderName()} </Menu.Item>
-        <Menu.Item onClick={logouth}>
-            <Icon name='sign-out'/>
-        </Menu.Item>
-      </Menu.Menu>
-    </Menu>
-  )
-} */

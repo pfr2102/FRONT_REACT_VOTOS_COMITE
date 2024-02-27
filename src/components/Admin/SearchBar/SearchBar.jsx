@@ -25,12 +25,6 @@ export const SearchBar = ({ setSearch }) => {
           onChange={handleChange}
           type="text"
         />
-        <button
-          className="btn btn-success"
-          onClick={() => setSearch(searchText)}
-        >
-          
-        </button>
       </div>
     </>
   );

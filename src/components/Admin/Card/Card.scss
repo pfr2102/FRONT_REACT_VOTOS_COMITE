@@ -2,10 +2,39 @@
   width: 25%;
   min-width: 300px;
   text-align: center;
+  background: linear-gradient(315deg, #D6C8BB 45%, #C4B19A 60%);
+  height: 36rem;
 }
 
-card-title {
+.custom-button {
+  background: linear-gradient(315deg, #36A767 0%, #4AA63C 74%) !important;
+  width: 70%;
+  height: 30%;
+  font-size: 1.3rem;
+  text-align: center;
+  transition: background 0.3s ease !important;
+}
+
+.custom-button:hover {
+  background: linear-gradient(315deg, #4AA63C 0%, #456654 74%) !important; 
+}
+.card-title {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+
+img {
+  width: 100%;
+  border-radius: 30px;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+  margin-top: -20px;
+}
+.content-card{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 20px;
+
 }

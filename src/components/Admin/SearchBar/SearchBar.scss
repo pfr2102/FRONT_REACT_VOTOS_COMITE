@@ -7,13 +7,21 @@
   right: 0;
   display: flex;
   justify-content: flex-end;
-  padding-bottom: 25px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  width: 100%;
+}
+.containerInput input{
+  border: 1px solid #4AA63C !important;
+}
+.containerInput input:focus {
+  box-shadow: 0 0 5px rgba(74, 166, 60, 0.5) !important; /* Cambia la sombra al enfocar */
 }
 
 @media (max-width: 988px){
   
   .inputBuscar{
-    width: 100% !important;
+    width: 50% !important;
   }
 
   .App{

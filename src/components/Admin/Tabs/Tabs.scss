@@ -9,12 +9,12 @@
 }
 
 .tabBase:hover {
-  background-color: #007bff;
+  background: linear-gradient(315deg, #D6C8BB 45%, #C4B19A 60%);
   color: white;
 }
 
 .activeTab {
-  background-color: #007bff;
+  background: linear-gradient(315deg, #C4B19A 45%, #D6C8BB 60%);
   color: white;
 }
 
