@@ -9,7 +9,7 @@ export const TableVotes = (props) => {
 
   const columns = [
     {
-      title: 'Num_etapa',
+      title: 'Etapa',
       dataIndex: 'id_etapa_fk',
       render: (idEtapa) => {
         switch (idEtapa) {

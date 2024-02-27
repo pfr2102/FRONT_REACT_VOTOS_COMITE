@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {useState} from 'react';
 //importaciones para el manejo de estilos 
-import {Button, Form} from 'semantic-ui-react';
+import {Icon} from 'semantic-ui-react';
 import "./LoginForm.scss";
 //importaciones para el manejo de formularios
 import * as yup from 'yup';
@@ -12,6 +12,9 @@ import {loginApi} from '../../../api/user';
 import {useAuth} from '../../../hooks';
 
 export const LoginForm = () => {
+   const [working, setWorking] = useState(false);
+   const [message, setMessage] = useState('Iniciar sesion');
+
    /* console.log(useAuth()); */
    const {login} = useAuth();
 
@@ -42,27 +45,56 @@ export const LoginForm = () => {
          }
       },
    });
-
-
+ 
+   //para una animacion del formulario al autenticarte
+   const handleSubmit = (e) => {
+     e.preventDefault();
+     if (working) return;
+     setWorking(true);
+     setTimeout(() => {
+       setMessage('Authenticating!');
+       setTimeout(() => {
+         setMessage('Iniciar sesion');
+         formik.handleSubmit(e);
+         setWorking(false);
+       },100 );
+     },100 );
+   };
 
   return (
-     <Form className='login-form-admin' onSubmit={formik.handleSubmit}>
-        <Form.Input 
-         name="username" 
-         placeholder='Numero de empleado' 
-         value={formik.values.username} 
-         onChange={formik.handleChange}
-         error={formik.errors.username}
-        />
-        <Form.Input 
-         name="password" 
-         placeholder='Contraseña' 
-         type='password' 
-         value={formik.values.password} 
-         onChange={formik.handleChange}
-         error={formik.errors.password}
-        />
-        <Button type='submit' content='Iniciar Sesion' primary fluid/>
-     </Form>
+      <form className={`login ${working ? 'loading' : ''}`} onSubmit={handleSubmit}>
+         <p className="title">Iniciar sesión</p>
+         <input
+            type="text"
+            name="username"
+            placeholder="Nombre de usuario"
+            value={formik.values.username}
+            onChange={formik.handleChange}
+         />
+         <i className="fa">
+            <Icon name='user' />
+         </i>
+         {formik.errors.username && (
+            <div className="error-message">{formik.errors.username}</div>
+         )}
+         <input
+            type="password"
+            name="password"
+            placeholder="Contraseña"
+            value={formik.values.password}
+            onChange={formik.handleChange}
+         />
+         <i className="fa">
+            <Icon name='lock' />
+         </i>
+         {formik.errors.password && (
+            <div className="error-message">{formik.errors.password}</div>
+         )}
+         <a href="#">¿Olvidaste tu contraseña?</a>
+         <button type='submit'>
+            {working && <i className="spinner"></i>}
+            <span className="state">{message} {working ? '' : <Icon name='arrow right' />}</span>
+         </button>
+      </form>     
   );
 }
