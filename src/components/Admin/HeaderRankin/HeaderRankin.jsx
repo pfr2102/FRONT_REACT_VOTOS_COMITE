@@ -80,9 +80,11 @@ export const HeaderRankin = ({getVotesManual}) => {
 
             <Button positive>
             <Icon name='refresh' />
+
             </Button>
         </div>
         <br />
+        
     </>
   )
 }
