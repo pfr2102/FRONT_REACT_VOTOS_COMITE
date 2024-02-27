@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Table, Button } from "antd";
 import { useAuth, useVotes } from "../../../hooks";
+import {toast} from 'react-toastify';
 import "./AddVoteForm.scss";
 
 export const AddVoteForm = ({ users, onDelete, stage, onClose }) => {
@@ -21,8 +22,9 @@ export const AddVoteForm = ({ users, onDelete, stage, onClose }) => {
 
     addVote(votes)
       .then(() => {
-        console.log("Votos agregados correctamente");
+        toast.success('VOTOS REGISTRADOS EXITOSAMENTE');
         onClose();
+        window.location.reload();
       })
       .catch((err) => {
         console.log(err);

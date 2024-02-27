@@ -115,6 +115,7 @@ export const Tabs = () => {
   const filteredUsersWithoutSelectedCards = filteredUsers.filter((user) => {
     return !selectedCards.some((card) => card.id === user.id);
   });
+
   const filteredUsersWithoutSelectedCards2 =
     votes &&
     votes.filter((vote) => {
@@ -171,7 +172,6 @@ export const Tabs = () => {
           </TabPane>
 
           <TabPane tabId="2">
-            <SearchBar setSearch={setSearch} />
             {hasVoted ? (
               <p>Ya has votado en esta etapa.</p>
             ) : dateValidator(parseInt(activeTab)) ? (
@@ -201,6 +201,7 @@ export const Tabs = () => {
           </TabPane>
         </TabContent>
       )}
+
       <ModalBasic
         show={showModal}
         onClose={() => setShowModal(false)}

@@ -60,7 +60,7 @@ export function useVotes() {
       setLoading(false);
 
       setVotes(response);
-      console.log(response);
+      //console.log(response);
     } catch (error) {
       setLoading(false);
       setError(error);

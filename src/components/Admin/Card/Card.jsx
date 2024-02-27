@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card as CustomCard, Col, Row, Button } from 'antd';
+import { Card as CustomCard, Button } from 'antd';
 import './Card.scss';
 
 export const CustomCardComponent = ({ user, action, electionCards, etapa }) => {
