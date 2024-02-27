@@ -65,7 +65,7 @@ export const Tabs = () => {
 
         return validate;
       } else if (stage === 2) {
-        const today = new Date("2024-02-28");
+        const today = new Date();
         today.setHours(0, 0, 0, 0);
         const startDate = parseDateString(stages[1].fecha_inicio);
         const endDate = parseDateString(stages[1].fecha_fin);
@@ -86,7 +86,7 @@ export const Tabs = () => {
     const year = new Date().getFullYear().toString();
     const etapa = activeTab === "1" ? 1 : 2;
     const result = await userVoted(etapa, year);
-    setHasVoted(false);
+    setHasVoted(result);
     dateValidator(etapa);
   };
 
