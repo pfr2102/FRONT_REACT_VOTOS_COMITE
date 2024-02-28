@@ -5,7 +5,7 @@ import {Form, Button, Icon, Dropdown } from 'semantic-ui-react';
 import {useVotes} from '../../../hooks';
 import './HeaderRankin.scss';
 
-export const HeaderRankin = ({getVotesManual}) => {
+export const HeaderRankin = ({getVotesManual, stage_one, stage_two}) => {
 
      /* SECCION DE FUNCIONALIDAD DEL FORMULARIO */
      const formik = useFormik({
@@ -78,10 +78,8 @@ export const HeaderRankin = ({getVotesManual}) => {
                 <Button type='submit' primary fluid >Buscar<Icon name='search'style={{marginLeft:'5px'}}/></Button>
             </Form>
 
-            <Button positive>
-            <Icon name='refresh' />
-
-            </Button>
+            <Button positive onClick={stage_one}>  <Icon name='calendar'/> Periodo Etapa 1 </Button>
+            <Button positive onClick={stage_two}> <Icon name='calendar'/>  Periodo Etapa 2 </Button>
         </div>
         <br />
         

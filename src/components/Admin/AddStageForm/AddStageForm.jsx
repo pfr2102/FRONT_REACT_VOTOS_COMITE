@@ -1,37 +1,72 @@
-
 import "./AddStageForm.scss";
+import React from 'react';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+import { Form, Button, Icon } from 'semantic-ui-react';
+import { toast } from 'react-toastify';
+import { useStage } from '../../../hooks';
 
-export const AddVoteForm = () => {
 
- /* SECCION DE FUNCIONALIDAD DEL FORMULARIO */
- const formik = useFormik({
-  initialValues:{
-      id_etapa_fk: '',
-      id_rango_fk: '',
-      fecha_voto: '',
-  },
-  /* esquema de validaciones o restricciones de cada campo */
-  validationSchema: Yup.object({
-      id_etapa_fk: Yup.number().required(true), 
-      id_rango_fk: Yup.number().required(true), 
-      fecha_voto: Yup.number().required(true),                
-  }),
-  /* es la accion a realizar cuando el usuario envia el formulario */
-  validateOnChange: false,
-  onSubmit: async (formValue) => {
-      try {//si hay un usuario actualizamos
-          await getVotesManual(formValue); //llamamos a la api para crear el usuario con una solicitud post 
-      }catch (error) {
-          console.error(error);
-          toast.error(`Error: ${error}`);
+export const AddStageForm = ({ stage, onCloseModal}) => {
+  const { updateStage } = useStage();
+
+  const formik = useFormik({
+    initialValues: {
+      fecha_inicio: '',
+      fecha_fin: '',
+    },
+    validationSchema: Yup.object({
+      fecha_inicio: Yup.date().required('Este campo es obligatorio'),
+      fecha_fin: Yup.date().required('Este campo es obligatorio'),
+    }),
+    onSubmit: async (formValues) => {
+      try {
+        // Formatea las fechas antes de enviarlas
+        console.log(formValues.fecha_inicio);
+        console.log(formValues.fecha_fin);
+        console.log(stage);
+        await updateStage(stage, formValues);
+        // Tu lógica para manejar el envío del formulario con las fechas formateadas
+        onCloseModal();
+        toast.success(`fechas de la etapa ${stage} actualizadas exitosamente`);
+      } catch (error) {
+        console.error(error);
+        toast.error(`Error: ${error}`);
+        // Manejar errores o mostrar mensajes de error
       }
-  }
-})
- 
+    },
+  });
 
   return (
     <>
-    
+      <Form className='add-edit-stage-form-rankin' onSubmit={formik.handleSubmit}>
+        <Form.Input
+          type="date"
+          label="Fecha de Inicio"
+          name="fecha_inicio"
+          onChange={formik.handleChange}
+          value={formik.values.fecha_inicio}
+        />
+        {formik.errors.fecha_inicio && formik.touched.fecha_inicio && (
+          <div className="error">{formik.errors.fecha_inicio}</div>
+        )}
+
+        <Form.Input
+          type="date"
+          label="Fecha de Fin"
+          name="fecha_fin"
+          onChange={formik.handleChange}
+          value={formik.values.fecha_fin}
+        />
+        {formik.errors.fecha_fin && formik.touched.fecha_fin && (
+          <div className="error">{formik.errors.fecha_fin}</div>
+        )}
+
+        <Button type='submit' primary fluid className="custom-button">
+          Actualizar Fechas <Icon name='calendar' style={{ marginLeft: '5px'  }} />
+        </Button>
+      </Form>
+      <br />
     </>
   );
 };

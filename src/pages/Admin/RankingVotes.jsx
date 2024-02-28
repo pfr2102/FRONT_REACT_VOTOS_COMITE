@@ -1,7 +1,7 @@
 import React, { useState ,useEffect } from 'react'
 import { useVotes, useUser } from '../../hooks';
 import { HeaderRankin } from '../../components/Admin/HeaderRankin/HeaderRankin';
-import { TableVotes, AddEditUserForm } from '../../components/Admin';
+import { TableVotes, AddEditUserForm, AddStageForm } from '../../components/Admin';
 import { ModalBasic } from '../../components/common';
 import { Loader } from 'semantic-ui-react';
 
@@ -27,6 +27,13 @@ export const RankingVotes = () => {
      const openCloseModal = () => { setShowModal((prev) => !prev); }  // modificar el estado de la ventana (cerrado/abierto) 
      const onRefresh = () => { setRefresh((prev) => !prev);} 
 
+     const updateStage = (stage) => {
+      setTitleModal('Etapa ' + stage);
+      setContentModal(<AddStageForm stage={stage} onCloseModal={openCloseModal}/>);
+      openCloseModal();
+    }
+
+
      const updateUser = (data) => {
       console.log('ventana modal');
       setTitleModal('Editar usuario');
@@ -44,7 +51,7 @@ export const RankingVotes = () => {
 
   return (
     <>
-        <HeaderRankin getVotesManual={getVotesManual}/>
+        <HeaderRankin getVotesManual={getVotesManual} stage_one={()=> updateStage(1)} stage_two={()=> updateStage(2)}/>
 
         {loading ? (<Loader active inline='centered'> Esperando Datos...</Loader> ) 
         :  

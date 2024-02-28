@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import { getMeApi } from '../api/user';
-import { getStagesApi } from '../api/stage';
+import { getStagesApi, updateStageApi } from '../api/stage';
 import { useAuth } from './useAuth';
 export function useStage() {
     const {auth} = useAuth();
@@ -31,6 +31,25 @@ export function useStage() {
             //throw error; 
         }
     }
+
+    const updateStage = async (idStage, data) => {
+        try {
+          setLoading(true);
+          // Aquí estamos asumiendo que `datosActualizar` contiene los datos que deseas enviar para la actualización
+          const response = await updateStageApi(auth.token, idStage, data);
+          // Después de actualizar, puedes llamar a `getStage` para obtener los datos actualizados
+          setLoading(false);
+
+          console.log(response);
+          setStages(response);
+          return response;
+        } catch (error) {
+            setLoading(false);
+            setError(error);
+        }
+    };
+
+
     return { 
         //estados
         loadingStage,
@@ -39,6 +58,7 @@ export function useStage() {
         auth,
         //metodos
         getMe,
-        getStage,      
+        getStage,  
+        updateStage    
      };
 }
