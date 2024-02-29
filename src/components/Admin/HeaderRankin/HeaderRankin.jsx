@@ -2,10 +2,14 @@ import React, { useState ,useEffect } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import {Form, Button, Icon, Dropdown } from 'semantic-ui-react';
-import {useVotes} from '../../../hooks';
+import {useStage} from '../../../hooks';
 import './HeaderRankin.scss';
 
 export const HeaderRankin = ({getVotesManual, stage_one, stage_two}) => {
+    const { getStage } = useStage();
+    useEffect(() => {
+        getStage();
+    }, []);
 
      /* SECCION DE FUNCIONALIDAD DEL FORMULARIO */
      const formik = useFormik({

@@ -9,6 +9,7 @@ import { useStage } from "../../../hooks/useStage";
 import { SearchBar } from "../SearchBar/SearchBar";
 import { ModalBasic } from "../../common/ModalBasic/ModalBasic";
 import { AddVoteForm } from "../AddVoteForm/AddVoteForm";
+import { Result } from "antd";
 
 export const Tabs = () => {
   const [activeTab, setActiveTab] = useState("1");
@@ -56,7 +57,7 @@ export const Tabs = () => {
   const dateValidator = (stage) => {
     if (stages) {
       if (stage === 1) {
-        const today = new Date('2024-02-25');
+        const today = new Date();
         today.setHours(0, 0, 0, 0);
         const startDate = parseDateString(stages[0].fecha_inicio);
         const endDate = parseDateString(stages[0].fecha_fin);
@@ -86,7 +87,7 @@ export const Tabs = () => {
     const year = new Date().getFullYear().toString();
     const etapa = activeTab === "1" ? 1 : 2;
     const result = await userVoted(etapa, year);
-    setHasVoted(false);
+    setHasVoted(result);
     dateValidator(etapa);
   };
 

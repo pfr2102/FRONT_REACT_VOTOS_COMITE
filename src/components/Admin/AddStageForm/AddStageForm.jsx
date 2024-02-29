@@ -1,30 +1,31 @@
 import "./AddStageForm.scss";
-import React from 'react';
-import { useFormik } from 'formik';
-import * as Yup from 'yup';
-import { Form, Button, Icon } from 'semantic-ui-react';
-import { toast } from 'react-toastify';
-import { useStage } from '../../../hooks';
+import React from "react";
+import { useFormik } from "formik";
+import { useEffect } from "react";
+import * as Yup from "yup";
+import { Form, Button, Icon } from "semantic-ui-react";
+import { toast } from "react-toastify";
+import { useStage } from "../../../hooks";
 
+export const AddStageForm = ({ stage, onCloseModal }) => {
+  const { updateStage, getStage, stages } = useStage();
 
-export const AddStageForm = ({ stage, onCloseModal}) => {
-  const { updateStage } = useStage();
+  useEffect(() => {
+    getStage();
+  }, []);
 
   const formik = useFormik({
     initialValues: {
-      fecha_inicio: '',
-      fecha_fin: '',
+      fecha_inicio: "",
+      fecha_fin: "",
     },
     validationSchema: Yup.object({
-      fecha_inicio: Yup.date().required('Este campo es obligatorio'),
-      fecha_fin: Yup.date().required('Este campo es obligatorio'),
+      fecha_inicio: Yup.date().required("Este campo es obligatorio"),
+      fecha_fin: Yup.date().required("Este campo es obligatorio"),
     }),
     onSubmit: async (formValues) => {
       try {
         // Formatea las fechas antes de enviarlas
-        console.log(formValues.fecha_inicio);
-        console.log(formValues.fecha_fin);
-        console.log(stage);
         await updateStage(stage, formValues);
         // Tu lógica para manejar el envío del formulario con las fechas formateadas
         onCloseModal();
@@ -32,14 +33,47 @@ export const AddStageForm = ({ stage, onCloseModal}) => {
       } catch (error) {
         console.error(error);
         toast.error(`Error: ${error}`);
-        // Manejar errores o mostrar mensajes de error
       }
     },
   });
-
   return (
     <>
-      <Form className='add-edit-stage-form-rankin' onSubmit={formik.handleSubmit}>
+      {stages && stages.length > 0 && stage === 1 && (
+        <div className="container">
+          <h4>Fechas cargadas</h4>
+          <div className="editStage">
+            <div className="start">
+              <p>Fecha de inicio:</p>
+              <span>{stages[0].fecha_inicio}</span>
+            </div>
+            <div className="end">
+              <p>Fecha de fin:</p>
+              <span>{stages[0].fecha_fin}</span>
+            </div>
+          </div>
+          <br />
+        </div>
+      )}
+      {stages && stages.length > 1 && stage !== 1 && (
+        <div className="container">
+          <h4>Fechas cargadas</h4>
+          <div className="editStage">
+            <div className="start">
+              <p>Fecha de inicio:</p>
+              <span>{stages[1].fecha_inicio}</span>
+            </div>
+            <div className="end">
+              <p>Fecha de fin:</p>
+              <span>{stages[1].fecha_fin}</span>
+            </div>
+          </div>
+          <br />
+        </div>
+      )}
+      <Form
+        className="add-edit-stage-form-rankin"
+        onSubmit={formik.handleSubmit}
+      >
         <Form.Input
           type="date"
           label="Fecha de Inicio"
@@ -62,8 +96,9 @@ export const AddStageForm = ({ stage, onCloseModal}) => {
           <div className="error">{formik.errors.fecha_fin}</div>
         )}
 
-        <Button type='submit' primary fluid className="custom-button">
-          Actualizar Fechas <Icon name='calendar' style={{ marginLeft: '5px'  }} />
+        <Button type="submit" primary fluid className="custom-button">
+          Actualizar Fechas{" "}
+          <Icon name="calendar" style={{ marginLeft: "5px" }} />
         </Button>
       </Form>
       <br />

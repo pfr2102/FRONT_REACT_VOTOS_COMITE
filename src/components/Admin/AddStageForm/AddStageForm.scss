@@ -16,3 +16,25 @@
         font-size: 1.3rem !important;
     }
 }
+
+.container{
+    text-align: center;
+}
+
+.editStage{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+}
+.editStage p{
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.start .end{
+    display: flex;
+    flex-direction: column;
+}
+
