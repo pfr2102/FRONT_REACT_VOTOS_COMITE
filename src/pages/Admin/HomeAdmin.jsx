@@ -1,7 +1,8 @@
-import React from 'react';
-import { useAuth } from '../../hooks'; // Assume useAuth hook provides logout functionality
-import './HomeAdmin.scss';
-import logo from '../../assets/LogoGob.png';
+import React from "react";
+import { useAuth } from "../../hooks"; // Assume useAuth hook provides logout functionality
+import "./HomeAdmin.scss";
+import logo from "../../assets/LogoGob.png";
+import ReactPlayer from "react-player";
 
 export const HomeAdmin = () => {
   const { logout } = useAuth(); // Access logout function from useAuth hook
@@ -15,9 +16,10 @@ export const HomeAdmin = () => {
 
   return (
     <>
-    <div className="HomeAdmin-container">
-      <img src={logo} alt="" />
-    </div>
-   </>    
+      <div className="HomeAdmin-container">
+        <img src={logo} alt="" />
+        {/*       <ReactPlayer url='https://www.youtube.com/watch?v=fe8R45JSnbw' playing controls/> */}
+      </div>
+    </>
   );
 };
