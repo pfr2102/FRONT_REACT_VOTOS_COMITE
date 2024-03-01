@@ -10,6 +10,7 @@ import {toast} from 'react-toastify';
 import {loginApi} from '../../../api/user';
 /*importaciones para el manejo provider (el contexto de nuestra aplicacion)*/
 import {useAuth} from '../../../hooks';
+import logo from "../../../assets/logo_nayarit.jpg";
 
 export const LoginForm = () => {
    const [working, setWorking] = useState(false);
@@ -64,6 +65,8 @@ export const LoginForm = () => {
   return (
       <form className={`login ${working ? 'loading' : ''}`} onSubmit={handleSubmit}>
          <p className="title">Iniciar sesión</p>
+         {}
+         <img  src={logo} alt="logo"/>
          <input
             type="text"
             name="username"
@@ -71,7 +74,7 @@ export const LoginForm = () => {
             value={formik.values.username}
             onChange={formik.handleChange}
          />
-         <i className="fa">
+         <i className="fa user">
             <Icon name='user' />
          </i>
          {formik.errors.username && (
@@ -84,7 +87,7 @@ export const LoginForm = () => {
             value={formik.values.password}
             onChange={formik.handleChange}
          />
-         <i className="fa">
+         <i className="fa lock">
             <Icon name='lock' />
          </i>
          {formik.errors.password && (

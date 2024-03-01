@@ -2,8 +2,6 @@ import React from "react";
 import { useAuth } from "../../hooks"; // Assume useAuth hook provides logout functionality
 import "./HomeAdmin.scss";
 import logo from "../../assets/LogoGob.png";
-import ReactPlayer from "react-player";
-
 export const HomeAdmin = () => {
   const { logout } = useAuth(); // Access logout function from useAuth hook
 

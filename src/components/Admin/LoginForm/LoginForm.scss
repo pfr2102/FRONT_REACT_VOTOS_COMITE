@@ -11,13 +11,13 @@ $primary: #D2C2B3;
 
 
 .login {
-    border-radius: 2px 2px 5px 5px;
+    border-radius: 8px 8px 20px 20px;
     padding: 10px 20px 20px 20px;
     width: 90%;
-    max-width: 320px;
+    max-width: 350px;
     background: #ffffff;
     position: relative;
-    padding-bottom: 80px;
+    padding-bottom: 100px;
     box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.3);
     margin: 0 auto;
   
@@ -45,11 +45,19 @@ $primary: #D2C2B3;
       }
     }
   }
+
+  img{
+    max-width: 60%;
+    margin: 0 auto; // Centra horizontalmente la imagen
+    display: block; // Asegura que la imagen esté centrada correctamente
+    margin-bottom: 20px; // Ajusta el margen inferior 
+  }
   
   input {
     display: block;
-    padding: 15px 10px;
-    margin-bottom: 10px;
+    font-size: 1.1rem ;
+    padding: 13px 10px;
+    margin-bottom: 15px;
     width: 100%;
     border: 1px solid #967a60;
     transition: border-width 0.2s ease;
@@ -57,8 +65,8 @@ $primary: #D2C2B3;
     color: #ccc;
     
     &+ i.fa {
-        color: #fff;
-      font-size: 1em;
+      color: #fff;
+      font-size: 1.2em;
       position: absolute;
       margin-top: -47px;
       opacity: 0;
@@ -67,28 +75,36 @@ $primary: #D2C2B3;
     }
     
     &:focus {
-      &+ i.fa {
+      &+ i.user {
         opacity: 1;
-        left: 30px;
-      transition: all 0.25s ease-out;
+        left: 31px;
+        top: 357px;
+        transition: all 0.25s ease-out;        
       }
+      &+ i.lock {
+        opacity: 1;
+        left: 31px;
+        top: 423px;
+        transition: all 0.25s ease-out;        
+      }
+
       outline: none;
       color: #363636;
       //border-color: $primary;
-      border-left-width: 35px;
+      border-left-width: 45px;
     }
     
   }
   
   a {
-   font-size: 0.8em;   
+   font-size: 0.9em;   
     color: $primary;
     text-decoration: none;
   }
   
   .title {
     color: #444;
-    font-size: 1.2em;
+    font-size: 1.4em;
     font-weight: bold;
     margin: 10px 0 30px 0;
     border-bottom: 1px solid #eee;
