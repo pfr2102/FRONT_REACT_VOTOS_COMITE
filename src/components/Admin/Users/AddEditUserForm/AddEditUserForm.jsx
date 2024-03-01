@@ -33,6 +33,7 @@ export const AddEditUserForm = ({onCloseModal, onRefresh, user, isBlock}) => {
             first_name:user?.first_name || '',
             last_name: user?.last_name || '',
             workstation: user?.workstation || '',
+            dependency: user?.dependency || '',
             id_rank_fk: user?.id_rank_fk || '',
             antiquity: user?.antiquity || '',
             //password: '',
@@ -47,6 +48,7 @@ export const AddEditUserForm = ({onCloseModal, onRefresh, user, isBlock}) => {
             first_name: Yup.string().required('El nombre es obligatorio'),
             last_name: Yup.string().required('El apellido es obligatorio'),
             workstation: Yup.string().required('La workstation es obligatoria'),
+            dependency: Yup.string().required('La dependency es obligatoria'),
             id_rank_fk: Yup.number().required('El rango es obligatorio'),
             antiquity: Yup.number(),
             password: (user?.password) ? Yup.string() : Yup.string().required('La contraseña es obligatoria'),//si se envio el user significa que se va a actualizar asi que la contraseña ya es opcional
@@ -83,6 +85,10 @@ export const AddEditUserForm = ({onCloseModal, onRefresh, user, isBlock}) => {
     <Form className='add-edit-user-form' onSubmit={formik.handleSubmit}>
         <Form.Group widths='equal'>
           <Form.Input name='username' placeholder='num_empleado' onChange={formik.handleChange} value={formik.values.username} error={formik.errors.username} readOnly={user ? true : false} />
+        </Form.Group>
+
+        <Form.Group widths='equal'>
+           <Form.Input name='dependency' placeholder='Dependencia' onChange={formik.handleChange} value={formik.values.dependency} error={formik.errors.dependency} readOnly={isBlock ? true : false}/>
         </Form.Group>
 
         <Form.Group widths='equal'>
