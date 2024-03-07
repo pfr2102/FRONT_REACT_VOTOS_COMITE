@@ -10,7 +10,7 @@ import {toast} from 'react-toastify';
 import {loginApi} from '../../../api/user';
 /*importaciones para el manejo provider (el contexto de nuestra aplicacion)*/
 import {useAuth} from '../../../hooks';
-import logo from "../../../assets/logo_nayarit.jpg";
+import logo from "../../../assets/logoLogin.png";
 
 export const LoginForm = () => {
    const [working, setWorking] = useState(false);

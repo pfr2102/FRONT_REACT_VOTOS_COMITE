@@ -30,6 +30,8 @@ export const LoginAdmin = () => {
   return (
     <div className="login-admin">
       <div className="wrapper">
+        <h3>Secretaría de Administración y Finanzas</h3>
+        <h3>Plataforma Ética de Participación Digital</h3>
         <LoginForm />
       </div>
       <div className="floating-buttons">

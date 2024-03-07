@@ -1,6 +1,5 @@
 import React from 'react';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
-import { Button } from 'semantic-ui-react';
 import '../App.scss';
 import { map } from 'lodash';
 import routers from './routes';
