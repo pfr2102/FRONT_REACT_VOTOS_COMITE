@@ -15,8 +15,6 @@ Aplicación web usando Django para el backend y React para el frontend, diseñad
 ![Image text](https://github.com/pfr2102/FRONT_REACT_VOTOS_COMITE/blob/host/public/cuatro.PNG)
 ![Image text](https://github.com/pfr2102/FRONT_REACT_VOTOS_COMITE/blob/host/public/cinco.PNG)
 ![Image text](https://github.com/pfr2102/FRONT_REACT_VOTOS_COMITE/blob/host/public/seis.PNG)
-![Image text](https://github.com/pfr2102/FRONT_REACT_VOTOS_COMITE/blob/host/public/dos.PNG)
-![Image text](https://github.com/pfr2102/FRONT_REACT_VOTOS_COMITE/blob/host/public/dos.PNG)
 
 > [!IMPORTANT]
 > Repositorio de las apis en Django con Rest Framework para la comunicacion con la BD
