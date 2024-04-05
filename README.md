@@ -5,6 +5,7 @@ Aplicación web usando Django para el backend y React para el frontend, diseñad
 > [!TIP]
 > url de la aplicacion desplegada con aws
 > (https://plataforma-etica.nayarit.gob.mx/admin/)
+>
 > url documentacion de api en django y rest framework
 > (https://plataforma-etica-api.nayarit.gob.mx/redoc/)
 
